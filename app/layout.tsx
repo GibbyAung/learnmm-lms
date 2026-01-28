@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { Oxanium, Merriweather, Fira_Code } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const oxanium = Oxanium({ subsets: ["latin"], variable: "--font-sans" });
+const merriweather = Merriweather({
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-serif",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "LearnMM - Myanmar",
@@ -29,10 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${oxanium.variable} ${merriweather.variable} ${firaCode.variable}antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
