@@ -11,6 +11,7 @@ import RenderEmptyState, {
 } from "./RenderState";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
+import { useConstruct } from "@/hooks/use-construct";
 
 interface UploaderState {
   id: string | null;
@@ -30,6 +31,7 @@ interface isAppProps {
 }
 
 export const Uploader = ({ onChange, value }: isAppProps) => {
+  const fileUrl = useConstruct(value || "");
   const [fileState, setFileState] = useState<UploaderState>({
     id: null,
     file: null,
@@ -38,7 +40,8 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
     isDeleting: false,
     error: false,
     fileType: "image",
-    key: value,
+    key: value || null,
+    objectUrl: value ? fileUrl : null,
   });
 
   async function uploadFile(file: File) {

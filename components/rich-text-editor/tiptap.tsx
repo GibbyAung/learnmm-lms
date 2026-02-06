@@ -13,7 +13,7 @@ const Tiptap = ({ field }: { field: any }) => {
         types: ["heading", "paragraph"],
       }),
     ],
-    immediatelyRender: false,
+
     editorProps: {
       attributes: {
         class:
@@ -24,6 +24,10 @@ const Tiptap = ({ field }: { field: any }) => {
     onUpdate: ({ editor }) => {
       field.onChange(JSON.stringify(editor.getJSON()));
     },
+    immediatelyRender: false,
+    onSelectionUpdate: ({ editor }) => {}, // ← Does nothing BUT causes re-render
+    onTransaction: ({ editor }) => {}, // ← Does nothing BUT causes re-render
+
     content: field.value
       ? JSON.parse(field.value)
       : "<p> Previous Defined Description not Found! </p>",

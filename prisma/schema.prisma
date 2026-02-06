@@ -30,6 +30,11 @@ model User {
   accounts      Account[]
   courses       Course[]
 
+  role       String?
+  banned     Boolean?  @default(false)
+  banReason  String?
+  banExpires DateTime?
+
   @@unique([email])
   @@map("user")
 }
@@ -44,6 +49,8 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
 
   @@unique([token])
   @@index([userId])
@@ -83,24 +90,25 @@ model Verification {
 }
 
 model Course {
-  id   String @id @default(cuid())
-  title String
+  id          String      @id @default(uuid())
+  title       String
   description String
-  fileKey String
-  price Int
-  duration Int
-  level CourseLevel @default(BEGINNER)
+  fileKey     String
+  price       Int
+  duration    Int
+  level       CourseLevel @default(BEGINNER)
 
-  category String
-  slug  String @unique
+  category         String
+  slug             String @unique
   smallDescription String
 
   status CourseStatus @default(DRAFT)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  courseChapters CourseChapter[]
 
 }
 
@@ -114,4 +122,31 @@ enum CourseStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
+}
+
+model CourseChapter {
+  id          String   @id @default(uuid())
+  title       String
+  position    Int
+  description String
+  duration    Int
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lessons Lesson[]
+}
+
+model Lesson {
+  id          String   @id @default(uuid())
+  title         String
+  description   String?
+  thumbnailKey  String?
+  videoKey      String?
+  position      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  courseChapter CourseChapter @relation(fields: [courseChapterId], references: [id], onDelete: Cascade)
+  courseChapterId String
 }

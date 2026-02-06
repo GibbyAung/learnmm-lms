@@ -1,8 +1,10 @@
+import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/S3Client";
 import { PutObjectAclCommand } from "@aws-sdk/client-s3";
+import { error } from "console";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -22,9 +24,7 @@ const aj = arcject
   );
 
 export async function DELETE(request: Request) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await requireAdmin();
 
   try {
     const decision = await aj.protect(request, {
@@ -56,12 +56,24 @@ export async function DELETE(request: Request) {
       Key: key,
     });
 
-    await S3.send(command);
+    try {
+      await S3.send(command);
 
-    return NextResponse.json(
-      { message: "File deleted successfully " },
-      { status: 200 }
-    );
+      return NextResponse.json(
+        { message: "File deleted successfully" },
+        { status: 200 }
+      );
+    } catch (error: any) {
+      // ✅ Handle NoSuchKey - file already gone, that's OK!
+      if (error.name === "NoSuchKey" || error.Code === "NoSuchKey") {
+        return NextResponse.json(
+          { message: "File already deleted or doesn't exist" },
+          { status: 200 } // ← Still return 200, goal achieved
+        );
+      }
+    }
+
+    throw error;
   } catch {
     return NextResponse.json(
       {

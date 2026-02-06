@@ -10,6 +10,7 @@ import { rateLimitSchema } from "better-auth";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { error } from "console";
+import { requireAdmin } from "@/app/data/admin/require-admin";
 
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { message: "File name is required." }),
@@ -34,9 +35,8 @@ const aj = arcject
   );
 
 export async function POST(req: Request) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await requireAdmin();
+
   try {
     const decision = await aj.protect(req, {
       fingerprint: session?.user.id as string,

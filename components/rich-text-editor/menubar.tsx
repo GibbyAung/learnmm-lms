@@ -30,9 +30,6 @@ interface MenubarProps {
   editor: Editor | null;
 }
 
-const ACTIVE_TOGGLE =
-  "data-[state=on]:!bg-accent data-[state=on]:!text-accent-foreground data-[state=on]:!ring-1 data-[state=on]:!ring-ring";
-
 export default function Menubar({ editor }: MenubarProps) {
   if (!editor) return null;
 
@@ -59,6 +56,9 @@ export default function Menubar({ editor }: MenubarProps) {
     }),
   });
 
+  console.log("Editor exists?", !!editor);
+  console.log("Bold state:", state.bold);
+
   return (
     <div className="border border-input border-t-0 border-x-0 rounded-t-lg bg-card flex flex-wrap gap-1 items-center">
       <TooltipProvider>
@@ -69,10 +69,12 @@ export default function Menubar({ editor }: MenubarProps) {
               <Toggle
                 size="sm"
                 pressed={state.bold}
-                onPressedChange={() =>
-                  editor.chain().focus().toggleBold().run()
-                }
-                className={ACTIVE_TOGGLE}
+                onPressedChange={() => {
+                  console.log("Toggling bold...");
+                  editor.chain().focus().toggleBold().run();
+                  console.log("Bold active now?", editor.isActive("bold"));
+                }}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <Bold />
               </Toggle>
@@ -90,7 +92,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleItalic().run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <Italic />
               </Toggle>
@@ -108,7 +110,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleStrike().run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <Strikethrough />
               </Toggle>
@@ -126,7 +128,6 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 1 }).run()
                 }
-                className={ACTIVE_TOGGLE}
               >
                 <Heading1 />
               </Toggle>
@@ -144,7 +145,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <Heading2 />
               </Toggle>
@@ -162,7 +163,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <Heading3 />
               </Toggle>
@@ -180,7 +181,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleBulletList().run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <List />
               </Toggle>
@@ -198,7 +199,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleOrderedList().run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <ListOrdered />
               </Toggle>
@@ -221,7 +222,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("left").run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <AlignLeft />
               </Toggle>
@@ -239,7 +240,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("center").run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <AlignCenter />
               </Toggle>
@@ -257,7 +258,7 @@ export default function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("right").run()
                 }
-                className={ACTIVE_TOGGLE}
+                className="aria-pressed:bg-accent aria-pressed:text-accent-foreground"
               >
                 <AlignRight />
               </Toggle>

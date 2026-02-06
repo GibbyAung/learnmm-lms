@@ -1,18 +1,55 @@
 "use server";
 
+import { requireAdmin } from "@/app/data/admin/require-admin";
+import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ApiReponse } from "@/lib/types";
 import { CourseScehmaType, courseSchema } from "@/lib/zodSchemas";
+import { request } from "@arcjet/next";
 import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 
 export async function CreateCourse(
   value: CourseScehmaType
 ): Promise<ApiReponse> {
+  const session = await requireAdmin();
+
+  const aj = arcject
+    .withRule(
+      detectBot({
+        mode: "LIVE",
+        allow: [],
+      })
+    )
+    .withRule(
+      fixedWindow({
+        mode: "LIVE",
+        window: "1m",
+        max: 5,
+      })
+    );
+
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
+    const req = await request();
+
+    const decision = await aj.protect(req, {
+      fingerprint: session?.user.id,
     });
+
+    if (!decision.isAllowed) {
+      if (decision.reason.isRateLimit()) {
+        return {
+          status: "error",
+          message: "Too many requests. Please try again later.",
+        };
+      }
+      return {
+        status: "error",
+        message:
+          "You look like a bot, if it's a mistake please contact support",
+      };
+    }
 
     const validation = courseSchema.safeParse(value);
 
