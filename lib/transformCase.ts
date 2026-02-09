@@ -12,8 +12,9 @@ export function prepareFormDefaults<
       course.level.slice(1).toLowerCase()) as any,
     status: (course.status.charAt(0) +
       course.status.slice(1).toLowerCase()) as any,
-    category: (course.category.charAt(0) +
-      course.category.slice(1).toLowerCase()) as any,
+    // category: (course.category.charAt(0) +
+    //   course.category.slice(1).toLowerCase()) as any,
+    category: course.category as any,
   };
 }
 

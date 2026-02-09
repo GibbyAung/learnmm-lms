@@ -4,8 +4,18 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Menubar from "./menubar";
 import TextAlign from "@tiptap/extension-text-align";
+import { useMemo } from "react";
 
 const Tiptap = ({ field }: { field: any }) => {
+  const initialContent = useMemo(() => {
+    if (!field.value) return "<p>Previous Defined Description not Found!</p>";
+    try {
+      return JSON.parse(field.value);
+    } catch {
+      return "<p>Invalid content</p>";
+    }
+  }, []);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -25,12 +35,8 @@ const Tiptap = ({ field }: { field: any }) => {
       field.onChange(JSON.stringify(editor.getJSON()));
     },
     immediatelyRender: false,
-    onSelectionUpdate: ({ editor }) => {}, // ← Does nothing BUT causes re-render
-    onTransaction: ({ editor }) => {}, // ← Does nothing BUT causes re-render
 
-    content: field.value
-      ? JSON.parse(field.value)
-      : "<p> Previous Defined Description not Found! </p>",
+    content: initialContent,
   });
 
   return (

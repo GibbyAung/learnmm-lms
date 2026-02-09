@@ -31,33 +31,50 @@ interface MenubarProps {
 }
 
 export default function Menubar({ editor }: MenubarProps) {
-  if (!editor) return null;
-
   const state = useEditorState({
-    editor,
-    selector: ({ editor }) => ({
-      bold: editor.isActive("bold"),
-      italic: editor.isActive("italic"),
-      strike: editor.isActive("strike"),
+    editor: editor as Editor,
+    selector: ({ editor }) => {
+      if (!editor) {
+        return {
+          bold: false,
+          italic: false,
+          strike: false,
+          h1: false,
+          h2: false,
+          h3: false,
+          bullet: false,
+          ordered: false,
+          alignLeft: false,
+          alignCenter: false,
+          alignRight: false,
+          canUndo: false,
+          canRedo: false,
+        };
+      }
 
-      h1: editor.isActive("heading", { level: 1 }),
-      h2: editor.isActive("heading", { level: 2 }),
-      h3: editor.isActive("heading", { level: 3 }),
+      return {
+        bold: editor.isActive("bold"),
+        italic: editor.isActive("italic"),
+        strike: editor.isActive("strike"),
 
-      bullet: editor.isActive("bulletList"),
-      ordered: editor.isActive("orderedList"),
+        h1: editor.isActive("heading", { level: 1 }),
+        h2: editor.isActive("heading", { level: 2 }),
+        h3: editor.isActive("heading", { level: 3 }),
 
-      alignLeft: editor.isActive({ textAlign: "left" }),
-      alignCenter: editor.isActive({ textAlign: "center" }),
-      alignRight: editor.isActive({ textAlign: "right" }),
+        bullet: editor.isActive("bulletList"),
+        ordered: editor.isActive("orderedList"),
 
-      canUndo: editor.can().undo(),
-      canRedo: editor.can().redo(),
-    }),
+        alignLeft: editor.isActive({ textAlign: "left" }),
+        alignCenter: editor.isActive({ textAlign: "center" }),
+        alignRight: editor.isActive({ textAlign: "right" }),
+
+        canUndo: editor.can().undo(),
+        canRedo: editor.can().redo(),
+      };
+    },
   });
 
-  console.log("Editor exists?", !!editor);
-  console.log("Bold state:", state.bold);
+  if (!editor) return null;
 
   return (
     <div className="border border-input border-t-0 border-x-0 rounded-t-lg bg-card flex flex-wrap gap-1 items-center">

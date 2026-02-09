@@ -29,10 +29,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${oxanium.variable} ${merriweather.variable} ${firaCode.variable}antialiased`}
+        suppressHydrationWarning={true}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
-          <Toaster />
+          <Toaster closeButton />
         </ThemeProvider>
       </body>
     </html>

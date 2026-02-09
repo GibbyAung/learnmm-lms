@@ -31,13 +31,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Tiptap from "@/components/rich-text-editor/tiptap";
 import { Uploader } from "@/components/file-uploader/Uploader";
 import { tryCatch } from "@/hooks/try-catch";
 import { useRouter } from "next/navigation";
 import { editCourse } from "../actions";
 import { AdminIndividualCourseType } from "@/app/data/admin/admin-get-course";
 import { prepareFormDefaults } from "@/lib/transformCase";
+import dynamic from "next/dynamic";
+
+const Tiptap = dynamic(() => import("@/components/rich-text-editor/tiptap"), {
+  ssr: false,
+});
 
 interface isAppProps {
   data: AdminIndividualCourseType;
