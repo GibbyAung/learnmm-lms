@@ -32,13 +32,16 @@ import {
   ChevronRight,
   FileText,
   GripVertical,
-  GripVerticalIcon,
   Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 import { reorderChaptersAction, reorderLessonsAction } from "../actions";
+import NewChapterModal from "./NewChapterModal";
+import NewLessonModal from "./NewLessonModal";
+import DeleteLesson from "./DeleteLesson";
+import DeleteChapter from "./DeleteChapter";
 
 interface isAppProps {
   data: AdminIndividualCourseType;
@@ -292,6 +295,7 @@ const CourseStructure = ({ data }: isAppProps) => {
       <Card>
         <CardHeader className="flex flex-row items-center gap-4 justify-between border-b border-border">
           <CardTitle>Chapter</CardTitle>
+          <NewChapterModal courseId={data.id} />
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <SortableContext strategy={verticalListSortingStrategy} items={items}>
@@ -327,9 +331,8 @@ const CourseStructure = ({ data }: isAppProps) => {
                           </CollapsibleTrigger>
                           <p className="text-sm text-primary">{item.title}</p>
                         </div>
-                        <Button size={"icon"} variant={"outline"}>
-                          <Trash2 className="size-4" />
-                        </Button>
+
+                        <DeleteChapter courseId={data.id} chapterId={item.id} />
                       </div>
 
                       <CollapsibleContent className="p-3">
@@ -338,7 +341,7 @@ const CourseStructure = ({ data }: isAppProps) => {
                             items={item.lessons.map((lesson) => lesson.id)}
                             strategy={verticalListSortingStrategy}
                           >
-                            {item.lessons.map((lesson, i) => (
+                            {item.lessons.map((lesson) => (
                               <SortableItem
                                 key={lesson.id}
                                 id={lesson.id}
@@ -364,23 +367,21 @@ const CourseStructure = ({ data }: isAppProps) => {
                                         </p>
                                       </Link>
                                     </div>
-                                    <Button variant={"outline"} size={"icon"}>
-                                      {" "}
-                                      <Trash2 className="size-4" />
-                                    </Button>
+                                    <DeleteLesson
+                                      courseId={data.id}
+                                      chapterId={item.id}
+                                      lessonId={lesson.id}
+                                    />
                                   </div>
                                 )}
                               </SortableItem>
                             ))}
                           </SortableContext>
                           <div className="p-2">
-                            <Button
-                              className="w-full"
-                              variant={"outline"}
-                              size={"sm"}
-                            >
-                              Add Lesson
-                            </Button>
+                            <NewLessonModal
+                              courseId={data.id}
+                              chapterId={item.id}
+                            />
                           </div>
                         </div>
                       </CollapsibleContent>
