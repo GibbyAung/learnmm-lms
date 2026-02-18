@@ -157,7 +157,11 @@ const EditCourseForm = ({ data }: isAppProps) => {
             render={({ field, fieldState }) => (
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-medium">Thumbnail Image</label>
-                <Uploader onChange={field.onChange} value={field.value} />
+                <Uploader
+                  onChange={field.onChange}
+                  value={field.value}
+                  fileTypeAccepted="image"
+                />
                 {fieldState.error && (
                   <p className="text-xs text-red-500">
                     {fieldState.error.message}

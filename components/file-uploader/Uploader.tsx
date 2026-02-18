@@ -28,9 +28,10 @@ interface UploaderState {
 interface isAppProps {
   value?: string;
   onChange?: (value: string) => void;
+  fileTypeAccepted: "image" | "video";
 }
 
-export const Uploader = ({ onChange, value }: isAppProps) => {
+export const Uploader = ({ onChange, value, fileTypeAccepted }: isAppProps) => {
   const fileUrl = useConstruct(value || "");
   const [fileState, setFileState] = useState<UploaderState>({
     id: null,
@@ -39,9 +40,9 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
     progress: 0,
     isDeleting: false,
     error: false,
-    fileType: "image",
+    fileType: fileTypeAccepted,
     key: value || null,
-    objectUrl: value ? fileUrl : null,
+    objectUrl: value ? fileUrl : undefined,
   });
 
   async function uploadFile(file: File) {
@@ -60,7 +61,7 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
           fileName: file.name,
           contentType: file.type,
           size: file.size,
-          isImage: true,
+          isImage: fileTypeAccepted === "image" ? true : false,
         }),
       });
 
@@ -132,28 +133,31 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
     }
   }
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Do something with the files
-    if (acceptedFiles.length > 0) {
-      const file = acceptedFiles[0];
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      // Do something with the files
+      if (acceptedFiles.length > 0) {
+        const file = acceptedFiles[0];
 
-      if (fileState.objectUrl && !fileState.objectUrl.startsWith("http")) {
-        URL.revokeObjectURL(fileState.objectUrl);
+        if (fileState.objectUrl && !fileState.objectUrl.startsWith("http")) {
+          URL.revokeObjectURL(fileState.objectUrl);
+        }
+        setFileState({
+          file: file,
+          uploading: false,
+          progress: 0,
+          objectUrl: URL.createObjectURL(file),
+          fileType: fileTypeAccepted,
+          id: uuidv4(), // Generate a unique ID using uuidv4(),
+          isDeleting: false,
+          error: false,
+        });
+
+        uploadFile(file);
       }
-      setFileState({
-        file: file,
-        uploading: false,
-        progress: 0,
-        objectUrl: URL.createObjectURL(file),
-        fileType: file.type.startsWith("image") ? "image" : "video",
-        id: uuidv4(), // Generate a unique ID using uuidv4(),
-        isDeleting: false,
-        error: false,
-      });
-
-      uploadFile(file);
-    }
-  }, []);
+    },
+    [fileState.objectUrl, uploadFile, fileTypeAccepted]
+  );
 
   async function handleRemoveFile() {
     if (fileState.isDeleting || !fileState.objectUrl) return;
@@ -196,7 +200,7 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
         progress: 0,
         isDeleting: false,
         error: false,
-        fileType: "image",
+        fileType: fileTypeAccepted,
       }));
 
       toast.success("Removed file successfully");
@@ -231,6 +235,7 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
           previewURL={fileState.objectUrl}
           handleRemoveFile={handleRemoveFile}
           isDeleting={fileState.isDeleting}
+          fileType={fileState.fileType}
         />
       );
     }
@@ -248,10 +253,12 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { "image/*": [] },
+    accept:
+      fileTypeAccepted === "video" ? { "video/*": [] } : { "image/*": [] },
     maxFiles: 1,
     multiple: false,
-    maxSize: 5 * 1024 * 1024,
+    maxSize:
+      fileTypeAccepted === "image" ? 5 * 1024 * 1024 : 5000 * 1024 * 1024,
     onDropRejected: (fileRejection: FileRejection[]) => {
       if (fileRejection.length > 0) {
         const tooMany = fileRejection.find(
@@ -264,7 +271,9 @@ export const Uploader = ({ onChange, value }: isAppProps) => {
           (rejection) => rejection.errors[0].code === "file-too-large"
         );
         if (tooLarge) {
-          toast.error("File size must be less than 5MB.");
+          toast.error(
+            `File size must be less than ${fileTypeAccepted === "image" ? "5MB" : "500MB"}.`
+          );
         }
       }
     },

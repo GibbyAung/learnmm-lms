@@ -56,7 +56,7 @@ export const lessonSchema = z.object({
     .max(100, { message: "Bug title must be at most 100 characters." }),
   courseId: z.string().uuid({ message: "Invalid course ID" }),
   chapterId: z.string().uuid({ message: "Invalid chapter ID" }),
-  descrpition: z
+  description: z
     .string()
     .min(3, { message: "Description is required." })
     .optional(),

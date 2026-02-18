@@ -72,7 +72,7 @@ export const AdminCourseCard = ({ data }: isAppProps) => {
 
       <CardContent className="p-4">
         <Link
-          href={`/admin/courses/${data.id}`}
+          href={`/admin/courses/${data.id}/edit`}
           className="font-medium line-clamp-2 text-lg hover:underline group-hover:text-primary transition-colors"
         >
           <h1 className="text-xl font-bold mt-2">{data.title}</h1>
