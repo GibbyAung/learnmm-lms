@@ -44,10 +44,12 @@ import { Uploader } from "@/components/file-uploader/Uploader";
 import { tryCatch } from "@/hooks/try-catch";
 import { CreateCourse } from "./actions";
 import { useRouter } from "next/navigation";
+import { useConfetti } from "@/hooks/use-confetti";
 
 const CourseCreationPage = () => {
   const [pending, startTransition] = useTransition();
   const router = useRouter();
+  const { triggerConfetti } = useConfetti();
 
   const form = useForm<CourseScehmaType>({
     resolver: zodResolver(courseSchema),
@@ -78,7 +80,7 @@ const CourseCreationPage = () => {
                 }
                 return value;
               },
-              2
+              2,
             )}
           </code>
         </pre>
@@ -100,6 +102,7 @@ const CourseCreationPage = () => {
 
       if (result.status === "success") {
         toast.success(result.message);
+        triggerConfetti();
         form.reset();
         router.push("/admin/courses");
       } else if (result.status === "error") {

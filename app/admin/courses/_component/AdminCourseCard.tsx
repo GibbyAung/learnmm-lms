@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useConstruct } from "@/hooks/use-construct";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import {
@@ -62,13 +63,14 @@ export const AdminCourseCard = ({ data }: isAppProps) => {
         </DropdownMenu>
       </div>
 
-      <Image
-        src={thumbnailURL}
-        alt="Thumbnail"
-        width={600}
-        height={400}
-        className="w-full rounded-t-lg aspect-video h-full object-cover"
-      />
+      <div className="relative w-full aspect-video">
+        <Image
+          src={thumbnailURL}
+          alt="Thumbnail"
+          fill
+          className="rounded-t-lg object-cover"
+        />
+      </div>
 
       <CardContent className="p-4">
         <Link
@@ -104,3 +106,33 @@ export const AdminCourseCard = ({ data }: isAppProps) => {
     </Card>
   );
 };
+
+export function AdminCourseCardSkeleton() {
+  return (
+    <Card className="group relative py-0 gap-0">
+      <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
+        <Skeleton className="size-9 rounded-md" />
+      </div>
+      <div className="relative w-full aspect-video">
+        <Skeleton className="absolute inset-0 rounded-t-lg" />
+      </div>
+      <CardContent className="p-4">
+        <Skeleton className="h-7 w-3/4 mt-2 mb-2 rounded" />
+        <Skeleton className="h-4 w-full mt-2 mb-4 rounded" />
+
+        <div className="mt-4 flex items-center gap-x-5">
+          <div className="flex items-center gap-x-2">
+            <Skeleton className="size-6 rounded-md" />
+            <Skeleton className="h-4 w-16 rounded" />
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Skeleton className="size-6 rounded-md" />
+            <Skeleton className="h-4 w-16 rounded" />
+          </div>
+        </div>
+
+        <Skeleton className="h-10 w-full mt-4 rounded" />
+      </CardContent>
+    </Card>
+  );
+}
