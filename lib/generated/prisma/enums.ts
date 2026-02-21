@@ -25,3 +25,12 @@ export const CourseStatus = {
 } as const
 
 export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus]
+
+
+export const EnrollmentStatus = {
+  Pending: 'Pending',
+  Active: 'Active',
+  Cancelled: 'Cancelled'
+} as const
+
+export type EnrollmentStatus = (typeof EnrollmentStatus)[keyof typeof EnrollmentStatus]

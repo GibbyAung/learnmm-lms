@@ -1,5 +1,5 @@
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
+import arcject, { fixedWindow } from "@/lib/arcject";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/S3Client";
@@ -8,20 +8,13 @@ import { error } from "console";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-const aj = arcject
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 5,
-    })
-  );
+const aj = arcject.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 5,
+  }),
+);
 
 export async function DELETE(request: Request) {
   const session = await requireAdmin();
@@ -34,7 +27,7 @@ export async function DELETE(request: Request) {
     if (decision.isDenied()) {
       return NextResponse.json(
         { error: "Not cool at all bro, not cool " },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
@@ -47,7 +40,7 @@ export async function DELETE(request: Request) {
         {
           error: "Missing an invalid Object key",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -61,14 +54,14 @@ export async function DELETE(request: Request) {
 
       return NextResponse.json(
         { message: "File deleted successfully" },
-        { status: 200 }
+        { status: 200 },
       );
     } catch (error: any) {
       // ✅ Handle NoSuchKey - file already gone, that's OK!
       if (error.name === "NoSuchKey" || error.Code === "NoSuchKey") {
         return NextResponse.json(
           { message: "File already deleted or doesn't exist" },
-          { status: 200 } // ← Still return 200, goal achieved
+          { status: 200 }, // ← Still return 200, goal achieved
         );
       }
     }
@@ -79,7 +72,7 @@ export async function DELETE(request: Request) {
       {
         error: "Missing an invalid Object key",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -77,7 +77,7 @@ const EditCourseForm = ({ data }: isAppProps) => {
                 if (blockedKeys.has(key)) return undefined;
                 return value;
               },
-              2
+              2,
             )}
           </code>
         </pre>
@@ -92,11 +92,12 @@ const EditCourseForm = ({ data }: isAppProps) => {
     });
     startTransition(async () => {
       const { data: result, error }: any = await tryCatch(
-        editCourse(values, data.id)
+        editCourse(values, data.id),
       );
 
       if (error) {
         toast.error("Unexpected error occured. Please try again");
+        return;
       }
 
       if (result.status === "success") {

@@ -1,7 +1,7 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
+import arcject, { fixedWindow } from "@/lib/arcject";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ApiReponse } from "@/lib/types";
@@ -11,24 +11,17 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function CreateCourse(
-  value: CourseScehmaType
+  value: CourseScehmaType,
 ): Promise<ApiReponse> {
   const session = await requireAdmin();
 
-  const aj = arcject
-    .withRule(
-      detectBot({
-        mode: "LIVE",
-        allow: [],
-      })
-    )
-    .withRule(
-      fixedWindow({
-        mode: "LIVE",
-        window: "1m",
-        max: 5,
-      })
-    );
+  const aj = arcject.withRule(
+    fixedWindow({
+      mode: "LIVE",
+      window: "1m",
+      max: 5,
+    }),
+  );
 
   try {
     const req = await request();

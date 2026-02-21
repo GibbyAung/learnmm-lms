@@ -98,6 +98,7 @@ const CourseCreationPage = () => {
 
       if (error) {
         toast.error("Unexpected error occured. Please try again");
+        return;
       }
 
       if (result.status === "success") {

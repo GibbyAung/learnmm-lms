@@ -19,16 +19,18 @@ model Test {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  courses       Course[]
+  id               String       @id
+  name             String
+  email            String
+  emailVerified    Boolean      @default(false)
+  image            String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  sessions         Session[]
+  accounts         Account[]
+  courses          Course[]
+  enrollment       Enrollment[]
+  stripeCustomerId String?      @unique
 
   role       String?
   banned     Boolean?  @default(false)
@@ -104,12 +106,13 @@ model Course {
 
   status CourseStatus @default(DRAFT)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
   courseChapters CourseChapter[]
 
+  enrollment Enrollment[]
 }
 
 enum CourseLevel {
@@ -139,14 +142,34 @@ model CourseChapter {
 }
 
 model Lesson {
-  id          String   @id @default(uuid())
-  title         String
-  description   String?
-  thumbnailKey  String?
-  videoKey      String?
-  position      Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  courseChapter CourseChapter @relation(fields: [courseChapterId], references: [id], onDelete: Cascade)
+  id              String        @id @default(uuid())
+  title           String
+  description     String?
+  thumbnailKey    String?
+  videoKey        String?
+  position        Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  courseChapter   CourseChapter @relation(fields: [courseChapterId], references: [id], onDelete: Cascade)
   courseChapterId String
+}
+
+model Enrollment {
+  id        String           @id @default(uuid())
+  amount    Int
+  status    EnrollmentStatus @default(Pending)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  course    Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@unique([userId, courseId])
+}
+
+enum EnrollmentStatus {
+  Pending
+  Active
+  Cancelled
 }

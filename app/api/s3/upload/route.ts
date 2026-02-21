@@ -5,7 +5,7 @@ import z from "zod";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3 } from "@/lib/S3Client";
 import { v4 as uuidv4 } from "uuid";
-import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
+import arcject, { fixedWindow } from "@/lib/arcject";
 import { rateLimitSchema } from "better-auth";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
@@ -19,20 +19,13 @@ export const fileUploadSchema = z.object({
   isImage: z.boolean(),
 });
 
-const aj = arcject
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 5,
-    })
-  );
+const aj = arcject.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 5,
+  }),
+);
 
 export async function POST(req: Request) {
   const session = await requireAdmin();
@@ -45,7 +38,7 @@ export async function POST(req: Request) {
     if (decision.isDenied()) {
       return NextResponse.json(
         { error: "Not cool at all bro, not cool " },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
@@ -89,7 +82,7 @@ export async function POST(req: Request) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }

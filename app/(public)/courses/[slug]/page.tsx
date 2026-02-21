@@ -1,7 +1,7 @@
 import { getIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Collapsible,
@@ -21,6 +21,10 @@ import {
 import { CheckIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { enrollInCourseAction } from "./actions";
+import { checkIfCourseBought } from "@/app/data/user/user-is-enrolled";
+import Link from "next/link";
+import { EnrollmentButton } from "./_component/EnrollmentButton";
 
 type Params = Promise<{ slug: string }>;
 
@@ -30,6 +34,8 @@ const SlugPage = async ({ params }: { params: Params }) => {
   const course = await getIndividualCourse(slug);
 
   const thumbnailURL = useConstruct(course.fileKey);
+
+  const isEnrolled = await checkIfCourseBought(course.id);
   return (
     <div className="grid grid-col-1 gap-8 lg:grid-cols-3 mt-5">
       <div className="order-1 lg:col-span-2">
@@ -252,7 +258,16 @@ const SlugPage = async ({ params }: { params: Params }) => {
                 </ul>
               </div>
 
-              <Button className="w-full">Entroll Now!</Button>
+              {isEnrolled ? (
+                <Link
+                  className={buttonVariants({ className: "w-full" })}
+                  href={"/dashboard"}
+                >
+                  Watch Course
+                </Link>
+              ) : (
+                <EnrollmentButton courseId={course.id} />
+              )}
             </CardContent>
           </Card>
         </div>

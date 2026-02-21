@@ -1,7 +1,7 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcject, { detectBot, fixedWindow } from "@/lib/arcject";
+import arcject, {  fixedWindow } from "@/lib/arcject";
 import { prisma } from "@/lib/prisma";
 import { ApiReponse } from "@/lib/types";
 import {
@@ -17,11 +17,7 @@ import { revalidatePath } from "next/cache";
 
 const aj = arcject
   .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
+
   .withRule(
     fixedWindow({
       mode: "LIVE",
