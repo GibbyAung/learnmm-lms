@@ -6,6 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import UserDropDown from "./UserDropDown";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const navigationList = [
@@ -71,6 +72,8 @@ const Navbar = () => {
             )}
           </div>
         </nav>
+
+        {/* Mobile Nav */}
       </div>
     </header>
   );
