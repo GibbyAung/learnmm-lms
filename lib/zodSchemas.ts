@@ -67,6 +67,42 @@ export const lessonSchema = z.object({
   videoKey: z.string().min(1, { message: "Video is required." }).optional(),
 });
 
+export const PlacementQuestionType = ["MULTIPLE_CHOICE", "TRUE_FALSE"] as const;
+
+export const placementQuestionSchema = z.object({
+  question: z.string().min(3, { message: "Question is required" }),
+  type: z.enum(PlacementQuestionType),
+  options: z.array(z.string()).default([]),
+  correctAnswer: z.string().min(1, { message: "Correct answer is required" }),
+});
+
+export const placementTestSchema = z.object({
+  title: z.string().min(3, { message: "Title is required" }),
+  description: z.string().optional(),
+  questions: z.array(placementQuestionSchema).min(1, {
+    message: "At least one question is required",
+  }),
+});
+
+export const assignPlacementTestSchema = z.object({
+  testId: z.string().uuid(),
+  studentId: z.string().min(1),
+});
+
+export const submitPlacementTestSchema = z.object({
+  resultId: z.string().uuid(),
+  answers: z.array(
+    z.object({
+      questionId: z.string().uuid(),
+      answer: z.string().min(1),
+    }),
+  ),
+});
+
 export type CourseScehmaType = z.infer<typeof courseSchema>;
 export type ChapterSchemaType = z.infer<typeof chapterSchema>;
 export type LessonSchemaType = z.infer<typeof lessonSchema>;
+export type PlacementQuestionSchemaType = z.infer<typeof placementQuestionSchema>;
+export type PlacementTestSchemaType = z.infer<typeof placementTestSchema>;
+export type AssignPlacementTestSchemaType = z.infer<typeof assignPlacementTestSchema>;
+export type SubmitPlacementTestSchemaType = z.infer<typeof submitPlacementTestSchema>;

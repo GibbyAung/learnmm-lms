@@ -43,6 +43,11 @@ const data = {
       icon: IconChartBar,
     },
     {
+      title: "Placement Tests",
+      url: "/admin/placement-tests",
+      icon: IconFileDescription,
+    },
+    {
       title: "Projects",
       url: "#",
       icon: IconFolder,

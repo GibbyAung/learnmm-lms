@@ -37,8 +37,96 @@ model User {
   banReason  String?
   banExpires DateTime?
 
+  createdPlacementTests   PlacementTest[]   @relation("PlacementTestTeacher")
+  assignedPlacementTests  PlacementResult[] @relation("PlacementResultAssignedBy")
+  studentPlacementResults PlacementResult[] @relation("PlacementResultStudent")
+
   @@unique([email])
   @@map("user")
+}
+
+model PlacementTest {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  teacherId String
+  teacher   User @relation("PlacementTestTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+
+  questions PlacementQuestion[]
+  results   PlacementResult[]
+}
+
+model PlacementQuestion {
+  id            String                @id @default(uuid())
+  question      String
+  type          PlacementQuestionType
+  options       Json?
+  correctAnswer String
+  position      Int
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+
+  testId String
+  test   PlacementTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  answers PlacementAnswer[]
+
+  @@unique([testId, position])
+}
+
+model PlacementResult {
+  id             String   @id @default(uuid())
+  assignedAt     DateTime @default(now())
+  submittedAt    DateTime?
+  score          Int?
+  totalQuestions Int      @default(0)
+  correctCount   Int      @default(0)
+  status         PlacementResultStatus @default(ASSIGNED)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  testId String
+  test   PlacementTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  studentId String
+  student   User @relation("PlacementResultStudent", fields: [studentId], references: [id], onDelete: Cascade)
+
+  assignedById String
+  assignedBy   User @relation("PlacementResultAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
+
+  answers PlacementAnswer[]
+
+  @@unique([testId, studentId])
+}
+
+model PlacementAnswer {
+  id        String   @id @default(uuid())
+  answer    String
+  isCorrect Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resultId String
+  result   PlacementResult @relation(fields: [resultId], references: [id], onDelete: Cascade)
+
+  questionId String
+  question   PlacementQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([resultId, questionId])
+}
+
+enum PlacementQuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+}
+
+enum PlacementResultStatus {
+  ASSIGNED
+  SUBMITTED
+  GRADED
 }
 
 model Session {
