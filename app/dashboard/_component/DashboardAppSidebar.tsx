@@ -34,6 +34,11 @@ const data = {
       url: "/dashboard",
       icon: IconDashboard,
     },
+    {
+      title: "Placement Tests",
+      url: "/dashboard/placement-tests",
+      icon: IconFileDescription,
+    },
   ],
   navClouds: [
     {
