@@ -14,7 +14,7 @@ import {
   AlertTriangle,
   BookOpen,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AccessDenied() {
   const router = useRouter();
@@ -101,8 +101,8 @@ export default function AccessDenied() {
               <AlertDescription className="text-left ml-2">
                 <strong>Administrator Access Required</strong>
                 <br />
-                You don't have permission to access this area of the Learning
-                Management System.
+                You don&apos;t have permission to access this area of the
+                Learning Management System.
               </AlertDescription>
             </Alert>
 

@@ -1197,6 +1197,7 @@ export const CourseScalarFieldEnum = {
   price: 'price',
   duration: 'duration',
   level: 'level',
+  stripePriceId: 'stripePriceId',
   category: 'category',
   slug: 'slug',
   smallDescription: 'smallDescription',

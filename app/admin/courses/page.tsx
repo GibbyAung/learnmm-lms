@@ -37,7 +37,7 @@ async function RenderCourses() {
   return (
     <>
       {courses.length === 0 ? (
-        <EmptyState />
+        <EmptyState title="No Courses Found" description="Create a course" />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
           {courses.map((course) => (

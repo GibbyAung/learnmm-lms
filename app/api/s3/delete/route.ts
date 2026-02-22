@@ -1,11 +1,10 @@
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcject, { fixedWindow } from "@/lib/arcject";
-import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/S3Client";
 import { PutObjectAclCommand } from "@aws-sdk/client-s3";
 import { error } from "console";
-import { headers } from "next/headers";
+
 import { NextResponse } from "next/server";
 
 const aj = arcject.withRule(

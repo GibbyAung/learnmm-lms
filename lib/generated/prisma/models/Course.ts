@@ -44,6 +44,7 @@ export type CourseMinAggregateOutputType = {
   price: number | null
   duration: number | null
   level: $Enums.CourseLevel | null
+  stripePriceId: string | null
   category: string | null
   slug: string | null
   smallDescription: string | null
@@ -61,6 +62,7 @@ export type CourseMaxAggregateOutputType = {
   price: number | null
   duration: number | null
   level: $Enums.CourseLevel | null
+  stripePriceId: string | null
   category: string | null
   slug: string | null
   smallDescription: string | null
@@ -78,6 +80,7 @@ export type CourseCountAggregateOutputType = {
   price: number
   duration: number
   level: number
+  stripePriceId: number
   category: number
   slug: number
   smallDescription: number
@@ -107,6 +110,7 @@ export type CourseMinAggregateInputType = {
   price?: true
   duration?: true
   level?: true
+  stripePriceId?: true
   category?: true
   slug?: true
   smallDescription?: true
@@ -124,6 +128,7 @@ export type CourseMaxAggregateInputType = {
   price?: true
   duration?: true
   level?: true
+  stripePriceId?: true
   category?: true
   slug?: true
   smallDescription?: true
@@ -141,6 +146,7 @@ export type CourseCountAggregateInputType = {
   price?: true
   duration?: true
   level?: true
+  stripePriceId?: true
   category?: true
   slug?: true
   smallDescription?: true
@@ -245,6 +251,7 @@ export type CourseGroupByOutputType = {
   price: number
   duration: number
   level: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -285,6 +292,7 @@ export type CourseWhereInput = {
   price?: Prisma.IntFilter<"Course"> | number
   duration?: Prisma.IntFilter<"Course"> | number
   level?: Prisma.EnumCourseLevelFilter<"Course"> | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFilter<"Course"> | string
   category?: Prisma.StringFilter<"Course"> | string
   slug?: Prisma.StringFilter<"Course"> | string
   smallDescription?: Prisma.StringFilter<"Course"> | string
@@ -305,6 +313,7 @@ export type CourseOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   category?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   smallDescription?: Prisma.SortOrder
@@ -319,6 +328,7 @@ export type CourseOrderByWithRelationInput = {
 
 export type CourseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  stripePriceId?: string
   slug?: string
   AND?: Prisma.CourseWhereInput | Prisma.CourseWhereInput[]
   OR?: Prisma.CourseWhereInput[]
@@ -338,7 +348,7 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   courseChapters?: Prisma.CourseChapterListRelationFilter
   enrollment?: Prisma.EnrollmentListRelationFilter
-}, "id" | "slug">
+}, "id" | "stripePriceId" | "slug">
 
 export type CourseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -348,6 +358,7 @@ export type CourseOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   category?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   smallDescription?: Prisma.SortOrder
@@ -373,6 +384,7 @@ export type CourseScalarWhereWithAggregatesInput = {
   price?: Prisma.IntWithAggregatesFilter<"Course"> | number
   duration?: Prisma.IntWithAggregatesFilter<"Course"> | number
   level?: Prisma.EnumCourseLevelWithAggregatesFilter<"Course"> | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringWithAggregatesFilter<"Course"> | string
   category?: Prisma.StringWithAggregatesFilter<"Course"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Course"> | string
   smallDescription?: Prisma.StringWithAggregatesFilter<"Course"> | string
@@ -390,6 +402,7 @@ export type CourseCreateInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -409,6 +422,7 @@ export type CourseUncheckedCreateInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -428,6 +442,7 @@ export type CourseUpdateInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -447,6 +462,7 @@ export type CourseUncheckedUpdateInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -466,6 +482,7 @@ export type CourseCreateManyInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -483,6 +500,7 @@ export type CourseUpdateManyMutationInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -499,6 +517,7 @@ export type CourseUncheckedUpdateManyInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -526,6 +545,7 @@ export type CourseCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   category?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   smallDescription?: Prisma.SortOrder
@@ -548,6 +568,7 @@ export type CourseMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   category?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   smallDescription?: Prisma.SortOrder
@@ -565,6 +586,7 @@ export type CourseMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   category?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   smallDescription?: Prisma.SortOrder
@@ -670,6 +692,7 @@ export type CourseCreateWithoutUserInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -688,6 +711,7 @@ export type CourseUncheckedCreateWithoutUserInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -735,6 +759,7 @@ export type CourseScalarWhereInput = {
   price?: Prisma.IntFilter<"Course"> | number
   duration?: Prisma.IntFilter<"Course"> | number
   level?: Prisma.EnumCourseLevelFilter<"Course"> | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFilter<"Course"> | string
   category?: Prisma.StringFilter<"Course"> | string
   slug?: Prisma.StringFilter<"Course"> | string
   smallDescription?: Prisma.StringFilter<"Course"> | string
@@ -752,6 +777,7 @@ export type CourseCreateWithoutCourseChaptersInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -770,6 +796,7 @@ export type CourseUncheckedCreateWithoutCourseChaptersInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -804,6 +831,7 @@ export type CourseUpdateWithoutCourseChaptersInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -822,6 +850,7 @@ export type CourseUncheckedUpdateWithoutCourseChaptersInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -840,6 +869,7 @@ export type CourseCreateWithoutEnrollmentInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -858,6 +888,7 @@ export type CourseUncheckedCreateWithoutEnrollmentInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -892,6 +923,7 @@ export type CourseUpdateWithoutEnrollmentInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -910,6 +942,7 @@ export type CourseUncheckedUpdateWithoutEnrollmentInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -928,6 +961,7 @@ export type CourseCreateManyUserInput = {
   price: number
   duration: number
   level?: $Enums.CourseLevel
+  stripePriceId: string
   category: string
   slug: string
   smallDescription: string
@@ -944,6 +978,7 @@ export type CourseUpdateWithoutUserInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -962,6 +997,7 @@ export type CourseUncheckedUpdateWithoutUserInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -980,6 +1016,7 @@ export type CourseUncheckedUpdateManyWithoutUserInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.EnumCourseLevelFieldUpdateOperationsInput | $Enums.CourseLevel
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   smallDescription?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1036,6 +1073,7 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   price?: boolean
   duration?: boolean
   level?: boolean
+  stripePriceId?: boolean
   category?: boolean
   slug?: boolean
   smallDescription?: boolean
@@ -1057,6 +1095,7 @@ export type CourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   price?: boolean
   duration?: boolean
   level?: boolean
+  stripePriceId?: boolean
   category?: boolean
   slug?: boolean
   smallDescription?: boolean
@@ -1075,6 +1114,7 @@ export type CourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   price?: boolean
   duration?: boolean
   level?: boolean
+  stripePriceId?: boolean
   category?: boolean
   slug?: boolean
   smallDescription?: boolean
@@ -1093,6 +1133,7 @@ export type CourseSelectScalar = {
   price?: boolean
   duration?: boolean
   level?: boolean
+  stripePriceId?: boolean
   category?: boolean
   slug?: boolean
   smallDescription?: boolean
@@ -1102,7 +1143,7 @@ export type CourseSelectScalar = {
   userId?: boolean
 }
 
-export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "fileKey" | "price" | "duration" | "level" | "category" | "slug" | "smallDescription" | "status" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["course"]>
+export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "fileKey" | "price" | "duration" | "level" | "stripePriceId" | "category" | "slug" | "smallDescription" | "status" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["course"]>
 export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   courseChapters?: boolean | Prisma.Course$courseChaptersArgs<ExtArgs>
@@ -1131,6 +1172,7 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     price: number
     duration: number
     level: $Enums.CourseLevel
+    stripePriceId: string
     category: string
     slug: string
     smallDescription: string
@@ -1571,6 +1613,7 @@ export interface CourseFieldRefs {
   readonly price: Prisma.FieldRef<"Course", 'Int'>
   readonly duration: Prisma.FieldRef<"Course", 'Int'>
   readonly level: Prisma.FieldRef<"Course", 'CourseLevel'>
+  readonly stripePriceId: Prisma.FieldRef<"Course", 'String'>
   readonly category: Prisma.FieldRef<"Course", 'String'>
   readonly slug: Prisma.FieldRef<"Course", 'String'>
   readonly smallDescription: Prisma.FieldRef<"Course", 'String'>

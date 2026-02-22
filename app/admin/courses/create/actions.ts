@@ -4,6 +4,7 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcject, { fixedWindow } from "@/lib/arcject";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { stripe } from "@/lib/stripe";
 import { ApiReponse } from "@/lib/types";
 import { CourseScehmaType, courseSchema } from "@/lib/zodSchemas";
 import { request } from "@arcjet/next";
@@ -66,8 +67,17 @@ export async function CreateCourse(
       userId: session?.user.id as string,
     };
 
+    const data = await stripe.products.create({
+      name: transformedData.title,
+      description: transformedData.smallDescription,
+      default_price_data: {
+        currency: "usd",
+        unit_amount: transformedData.price * 100,
+      },
+    });
+
     await prisma.course.create({
-      data: transformedData,
+      data: { ...transformedData, stripePriceId: data.default_price as string },
     });
 
     return {

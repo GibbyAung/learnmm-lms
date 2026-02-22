@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CloudUpload, ImageIcon, Loader2, XIcon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
 import { Button } from "../ui/button";
 
 const RenderEmptyState = ({ isDragActive }: { isDragActive: boolean }) => {
@@ -11,7 +10,7 @@ const RenderEmptyState = ({ isDragActive }: { isDragActive: boolean }) => {
         <CloudUpload
           className={cn(
             "size-6 text-muted-foreground",
-            isDragActive && "text-primary"
+            isDragActive && "text-primary",
           )}
         />
       </div>

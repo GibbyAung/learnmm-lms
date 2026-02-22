@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
-import { Loader, Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import React, { useState, useTransition } from "react";
 import { deleteLesson } from "../actions";
 import { toast } from "sonner";
@@ -30,7 +30,7 @@ const DeleteLesson = ({
 
   async function onSubmit() {
     const { data: result, error } = await tryCatch(
-      deleteLesson({ courseId, chapterId, lessonId })
+      deleteLesson({ courseId, chapterId, lessonId }),
     );
 
     if (error) {

@@ -8,14 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  chapterSchema,
-  ChapterSchemaType,
-  lessonSchema,
-  LessonSchemaType,
-} from "@/lib/zodSchemas";
+import { lessonSchema, LessonSchemaType } from "@/lib/zodSchemas";
 import { Loader2, Plus } from "lucide-react";
-import React, { useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -28,8 +23,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { tryCatch } from "@/hooks/try-catch";
-import { create } from "domain";
-import { createChapter, createLesson } from "../actions";
+
+import { createLesson } from "../actions";
 import { toast } from "sonner";
 
 const NewLessonModal = ({

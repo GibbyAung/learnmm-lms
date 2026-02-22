@@ -3,15 +3,12 @@
 import * as React from "react";
 import {
   IconCamera,
-  IconChartBar,
   IconDashboard,
   IconFileAi,
   IconFileDescription,
-  IconFolder,
   IconHelp,
   IconSearch,
   IconSettings,
-  IconUsers,
 } from "@tabler/icons-react";
 import Logo from "@/public/learnlogo.png";
 
@@ -34,23 +31,8 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/admin",
+      url: "/dashboard",
       icon: IconDashboard,
-    },
-    {
-      title: "Courses",
-      url: "/admin/courses",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
     },
   ],
   navClouds: [

@@ -15,14 +15,7 @@ import {
   courseSchema,
   CourseStatus,
 } from "@/lib/zodSchemas";
-import {
-  ArrowLeft,
-  Loader,
-  Loader2,
-  PlusCircleIcon,
-  PlusIcon,
-  SparkleIcon,
-} from "lucide-react";
+import { ArrowLeft, Loader2, PlusCircleIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -94,7 +87,7 @@ const CourseCreationPage = () => {
       } as React.CSSProperties,
     });
     startTransition(async () => {
-      const { data: result, error }: any = await tryCatch(CreateCourse(data));
+      const { data: result, error } = await tryCatch(CreateCourse(data));
 
       if (error) {
         toast.error("Unexpected error occured. Please try again");

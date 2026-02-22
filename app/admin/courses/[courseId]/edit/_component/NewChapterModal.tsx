@@ -8,12 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  chapterSchema,
-  ChapterSchemaType,
-  CourseScehmaType,
-  courseSchema,
-} from "@/lib/zodSchemas";
+import { chapterSchema, ChapterSchemaType } from "@/lib/zodSchemas";
 import { Loader2, Plus } from "lucide-react";
 import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -28,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { tryCatch } from "@/hooks/try-catch";
-import { create } from "domain";
+
 import { createChapter } from "../actions";
 import { toast } from "sonner";
 

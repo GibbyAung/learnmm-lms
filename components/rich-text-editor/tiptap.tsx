@@ -14,7 +14,7 @@ const Tiptap = ({ field }: { field: any }) => {
     } catch {
       return "<p>Invalid content</p>";
     }
-  }, []);
+  }, [field.value]);
 
   const editor = useEditor({
     extensions: [

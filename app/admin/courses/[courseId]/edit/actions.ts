@@ -1,7 +1,7 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcject, {  fixedWindow } from "@/lib/arcject";
+import arcject, { fixedWindow } from "@/lib/arcject";
 import { prisma } from "@/lib/prisma";
 import { ApiReponse } from "@/lib/types";
 import {
@@ -15,20 +15,17 @@ import {
 import { request } from "@arcjet/next";
 import { revalidatePath } from "next/cache";
 
-const aj = arcject
-  .withRule(
-
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 5,
-    })
-  );
+const aj = arcject.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 5,
+  }),
+);
 
 export async function editCourse(
   data: CourseScehmaType,
-  courseId: string
+  courseId: string,
 ): Promise<ApiReponse> {
   const user = await requireAdmin();
 
@@ -109,7 +106,7 @@ export async function reorderLessonsAction(
     id: string;
     position: number;
   }[],
-  courseId: string
+  courseId: string,
 ): Promise<ApiReponse> {
   try {
     if (!lessons || lessons.length === 0) {
@@ -123,7 +120,7 @@ export async function reorderLessonsAction(
       prisma.lesson.update({
         where: { id: lesson.id, courseChapterId: chapterId },
         data: { position: lesson.position },
-      })
+      }),
     );
 
     await prisma.$transaction(updates);
@@ -148,7 +145,7 @@ export async function reorderChaptersAction(
     id: string;
     position: number;
   }[],
-  courseId: string
+  courseId: string,
 ): Promise<ApiReponse> {
   try {
     if (!chapters || chapters.length === 0) {
@@ -162,7 +159,7 @@ export async function reorderChaptersAction(
       prisma.courseChapter.update({
         where: { id: chapter.id, courseId: courseId },
         data: { position: chapter.position },
-      })
+      }),
     );
 
     await prisma.$transaction(updates);
@@ -183,7 +180,7 @@ export async function reorderChaptersAction(
 }
 
 export async function createChapter(
-  values: ChapterSchemaType
+  values: ChapterSchemaType,
 ): Promise<ApiReponse> {
   await requireAdmin();
   try {
@@ -230,7 +227,7 @@ export async function createChapter(
 }
 
 export async function createLesson(
-  values: LessonSchemaType
+  values: LessonSchemaType,
 ): Promise<ApiReponse> {
   await requireAdmin();
   try {
@@ -255,7 +252,7 @@ export async function createLesson(
           title: result.data.name,
           courseChapterId: result.data.chapterId,
           position: maxPos ? maxPos?.position + 1 : 1,
-          description: result.data.descrpition,
+          description: result.data.description,
           videoKey: result.data.videoKey,
           thumbnailKey: result.data.thumbnailKey,
         },
@@ -346,7 +343,7 @@ export async function deleteLesson({
       status: "success",
       message: "Lesson deleted successfully.",
     };
-  } catch (error) {
+  } catch {
     return {
       status: "error",
       message: "Failed to delete lesson.",
@@ -400,7 +397,7 @@ export async function deleteChapter({
     }
 
     const remainingChapters = chapters.filter(
-      (chapter) => chapter.id !== chapterId
+      (chapter) => chapter.id !== chapterId,
     );
 
     const updates = remainingChapters.map((chapter, index) => {
