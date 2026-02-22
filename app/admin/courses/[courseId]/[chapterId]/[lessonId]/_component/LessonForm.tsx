@@ -17,14 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { tryCatch } from "@/hooks/try-catch";
-import router from "next/router";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+
+import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Tiptap from "@/components/rich-text-editor/tiptap";
 import { Uploader } from "@/components/file-uploader/Uploader";
@@ -78,7 +72,7 @@ const LessonForm = ({ data, chapterId, courseId }: isAppProps) => {
     // });
     startTransition(async () => {
       const { data: result, error } = await tryCatch(
-        updateLesson(values, data.id)
+        updateLesson(values, data.id),
       );
       if (error) {
         toast.error("Unexpected error occured. Please try again");
@@ -114,7 +108,7 @@ const LessonForm = ({ data, chapterId, courseId }: isAppProps) => {
               <Controller
                 control={form.control}
                 name="name"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lesson Name</FormLabel>
                     <Input placeholder="Hello Chapter" {...field} />
@@ -125,7 +119,7 @@ const LessonForm = ({ data, chapterId, courseId }: isAppProps) => {
               <Controller
                 control={form.control}
                 name="description"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lesson Description</FormLabel>
                     <Tiptap field={field} />
@@ -136,7 +130,7 @@ const LessonForm = ({ data, chapterId, courseId }: isAppProps) => {
               <Controller
                 control={form.control}
                 name="thumbnailKey"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lesson Thumbnail</FormLabel>
                     <Uploader
@@ -151,7 +145,7 @@ const LessonForm = ({ data, chapterId, courseId }: isAppProps) => {
               <Controller
                 control={form.control}
                 name="videoKey"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lesson Video File</FormLabel>
                     <Uploader

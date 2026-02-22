@@ -5,17 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
 import { BookOpen, LayoutDashboard, PartyPopper, Trophy } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { data: session } = authClient.useSession();
-  const router = useRouter();
-
-  interface FeatureProps {
-    title: string;
-    description: string;
-    icon: string;
-  }
 
   const features = [
     {

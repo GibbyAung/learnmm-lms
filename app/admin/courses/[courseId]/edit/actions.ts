@@ -131,8 +131,7 @@ export async function reorderLessonsAction(
       status: "success",
       message: "Reordered lessons successfully.",
     };
-  } catch (error) {
-    console.log(error);
+  } catch {
     return {
       status: "error",
       message: "Failed to reorder lessons.",
@@ -170,8 +169,7 @@ export async function reorderChaptersAction(
       status: "success",
       message: "Reordered chapters successfully.",
     };
-  } catch (error) {
-    console.log(error);
+  } catch {
     return {
       status: "error",
       message: "Failed to reorder chapters.",
@@ -420,7 +418,7 @@ export async function deleteChapter({
       status: "success",
       message: "Chapter deleted successfully.",
     };
-  } catch (error) {
+  } catch {
     return {
       status: "error",
       message: "Failed to delete chapter.",

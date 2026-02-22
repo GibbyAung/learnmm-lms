@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
-import { Loader, Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import React, { useState, useTransition } from "react";
-import { deleteChapter, deleteLesson } from "../actions";
+import { deleteChapter } from "../actions";
 import { toast } from "sonner";
 
 const DeleteChapter = ({
@@ -24,11 +24,11 @@ const DeleteChapter = ({
   chapterId: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const [isPending] = useTransition();
 
   async function onSubmit() {
     const { data: result, error } = await tryCatch(
-      deleteChapter({ courseId, chapterId })
+      deleteChapter({ courseId, chapterId }),
     );
 
     if (error) {

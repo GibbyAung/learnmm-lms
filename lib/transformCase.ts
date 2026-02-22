@@ -1,33 +1,50 @@
-// lib/transform-course.ts
+const LEVEL_TO_FORM = {
+  BEGINNER: "Beginner",
+  INTERMEDIATE: "Intermediate",
+  ADVANCED: "Advanced",
+} as const;
 
-/**
- * Prepare course data for form defaultValues
- */
+const LEVEL_TO_DB = {
+  Beginner: "BEGINNER",
+  Intermediate: "INTERMEDIATE",
+  Advanced: "ADVANCED",
+} as const;
+
+const STATUS_TO_FORM = {
+  PUBLISHED: "Published",
+  DRAFT: "Draft",
+  ARCHIVED: "Archived",
+} as const;
+
+const STATUS_TO_DB = {
+  Published: "PUBLISHED",
+  Draft: "DRAFT",
+  Archived: "ARCHIVED",
+} as const;
+
+type DbLevel = keyof typeof LEVEL_TO_FORM;
+type FormLevel = keyof typeof LEVEL_TO_DB;
+
+type DbStatus = keyof typeof STATUS_TO_FORM;
+type FormStatus = keyof typeof STATUS_TO_DB;
+
 export function prepareFormDefaults<
-  T extends { level: string; status: string; category: string },
+  T extends { level: DbLevel; status: DbStatus; category: string },
 >(course: T) {
   return {
     ...course,
-    level: (course.level.charAt(0) +
-      course.level.slice(1).toLowerCase()) as string,
-    status: (course.status.charAt(0) +
-      course.status.slice(1).toLowerCase()) as string,
-    // category: (course.category.charAt(0) +
-    //   course.category.slice(1).toLowerCase()) as string,
-    category: course.category as string,
+    level: LEVEL_TO_FORM[course.level],
+    status: STATUS_TO_FORM[course.status],
+    category: course.category, // keep as-is unless your form expects a union too
   };
 }
 
-/**
- * Prepare form data for database save
- * Transforms form format (Capitalized) to DB format (UPPERCASE)
- */
 export function prepareDbData<
-  T extends { level: string; status: string; category: string },
+  T extends { level: FormLevel; status: FormStatus; category: string },
 >(formData: T) {
   return {
     ...formData,
-    level: formData.level.toUpperCase() as string,
-    status: formData.status.toUpperCase() as string,
+    level: LEVEL_TO_DB[formData.level],
+    status: STATUS_TO_DB[formData.status],
   };
 }

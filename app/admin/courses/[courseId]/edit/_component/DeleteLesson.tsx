@@ -26,7 +26,7 @@ const DeleteLesson = ({
   lessonId: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const [isPending] = useTransition();
 
   async function onSubmit() {
     const { data: result, error } = await tryCatch(

@@ -1,7 +1,7 @@
 import { getIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Collapsible,
@@ -20,11 +20,11 @@ import {
 } from "@tabler/icons-react";
 import { CheckIcon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
-import { enrollInCourseAction } from "./actions";
+
 import { checkIfCourseBought } from "@/app/data/user/user-is-enrolled";
 import Link from "next/link";
 import { EnrollmentButton } from "./_component/EnrollmentButton";
+import { env } from "@/lib/env";
 
 type Params = Promise<{ slug: string }>;
 
@@ -33,7 +33,7 @@ const SlugPage = async ({ params }: { params: Params }) => {
 
   const course = await getIndividualCourse(slug);
 
-  const thumbnailURL = useConstruct(course.fileKey);
+  const thumbnailURL = `https://${env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.t3.storage.dev/${course.fileKey}`;
 
   const isEnrolled = await checkIfCourseBought(course.id);
   return (

@@ -1,12 +1,11 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/themeToggle";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import UserDropDown from "./UserDropDown";
-import { DropdownMenu } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const navigationList = [

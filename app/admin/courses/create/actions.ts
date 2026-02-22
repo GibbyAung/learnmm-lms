@@ -2,15 +2,12 @@
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcject, { fixedWindow } from "@/lib/arcject";
-import { auth } from "@/lib/auth";
+
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import { ApiReponse } from "@/lib/types";
 import { CourseScehmaType, courseSchema } from "@/lib/zodSchemas";
 import { request } from "@arcjet/next";
-import { headers } from "next/headers";
-import { NextResponse } from "next/server";
-
 export async function CreateCourse(
   value: CourseScehmaType,
 ): Promise<ApiReponse> {

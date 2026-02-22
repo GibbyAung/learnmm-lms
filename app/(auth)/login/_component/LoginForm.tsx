@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -30,7 +29,7 @@ const LoginForm = () => {
         fetchOptions: {
           onSuccess: () => {
             toast.success(
-              "Signed in with Github successfully. You will be redirected...."
+              "Signed in with Github successfully. You will be redirected....",
             );
           },
           onError: () => {

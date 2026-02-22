@@ -50,7 +50,7 @@ export async function deleteCourse(courseId: string): Promise<ApiReponse> {
       status: "success",
       message: "Course Deleted Successfully",
     };
-  } catch (error) {
+  } catch {
     return {
       status: "error",
       message: "Failed to delete course",

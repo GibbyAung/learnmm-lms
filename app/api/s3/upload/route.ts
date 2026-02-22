@@ -71,7 +71,7 @@ export async function POST(req: Request) {
     };
 
     return NextResponse.json(response);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
         error: "Failed to generate pre-signed URL",

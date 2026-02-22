@@ -7,7 +7,7 @@ import { lessonSchema, LessonSchemaType } from "@/lib/zodSchemas";
 
 export async function updateLesson(
   value: LessonSchemaType,
-  lessonId: string
+  lessonId: string,
 ): Promise<ApiReponse> {
   await requireAdmin();
 
@@ -39,7 +39,7 @@ export async function updateLesson(
       status: "success",
       message: "Lesson Updated Successfully",
     };
-  } catch (error) {
+  } catch {
     return {
       status: "error",
       message: "Failed to Update Lesson",

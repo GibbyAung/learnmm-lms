@@ -45,93 +45,96 @@ export const Uploader = ({ onChange, value, fileTypeAccepted }: isAppProps) => {
     objectUrl: value ? fileUrl : undefined,
   });
 
-  async function uploadFile(file: File) {
-    setFileState((prev) => ({
-      ...prev,
-      uploading: true,
-      progress: 0,
-    }));
+  const uploadFile = useCallback(
+    async (file: File) => {
+      setFileState((prev) => ({
+        ...prev,
+        uploading: true,
+        progress: 0,
+      }));
 
-    try {
-      //Step 1: Pre-signed URL
-      const preSignedResponse = await fetch("/api/s3/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fileName: file.name,
-          contentType: file.type,
-          size: file.size,
-          isImage: fileTypeAccepted === "image" ? true : false,
-        }),
-      });
+      try {
+        //Step 1: Pre-signed URL
+        const preSignedResponse = await fetch("/api/s3/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fileName: file.name,
+            contentType: file.type,
+            size: file.size,
+            isImage: fileTypeAccepted === "image" ? true : false,
+          }),
+        });
 
-      if (!preSignedResponse.ok) {
-        toast.error("Failed to get Pre-Signed URL");
+        if (!preSignedResponse.ok) {
+          toast.error("Failed to get Pre-Signed URL");
+
+          setFileState((prev) => ({
+            ...prev,
+            uploading: false,
+            progress: 0,
+            error: true,
+          }));
+
+          return;
+        }
+
+        const { presignedUrl, key } = await preSignedResponse.json();
+
+        await new Promise<void>((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+
+          xhr.upload.onprogress = (event) => {
+            if (event.lengthComputable) {
+              const percentageCompleted = (event.loaded / event.total) * 100;
+
+              setFileState((prev) => ({
+                ...prev,
+                progress: Math.round(percentageCompleted),
+              }));
+            }
+          };
+
+          xhr.onload = () => {
+            if (xhr.status === 200 || xhr.status === 400) {
+              setFileState((prev) => ({
+                ...prev,
+                progress: 100,
+                uploading: false,
+                key: key,
+              }));
+
+              onChange?.(key);
+
+              toast.success("File Uploaded Successfully");
+
+              resolve();
+            } else {
+              reject(new Error("Upload Failed...."));
+            }
+          };
+
+          xhr.onerror = () => {
+            reject(new Error("Upload Failed...."));
+          };
+
+          xhr.open("PUT", presignedUrl);
+
+          xhr.send(file);
+        });
+      } catch {
+        toast.error("Something went wrong");
 
         setFileState((prev) => ({
           ...prev,
-          uploading: false,
           progress: 0,
           error: true,
+          uploading: false,
         }));
-
-        return;
       }
-
-      const { presignedUrl, key } = await preSignedResponse.json();
-
-      await new Promise<void>((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.upload.onprogress = (event) => {
-          if (event.lengthComputable) {
-            const percentageCompleted = (event.loaded / event.total) * 100;
-
-            setFileState((prev) => ({
-              ...prev,
-              progress: Math.round(percentageCompleted),
-            }));
-          }
-        };
-
-        xhr.onload = () => {
-          if (xhr.status === 200 || xhr.status === 400) {
-            setFileState((prev) => ({
-              ...prev,
-              progress: 100,
-              uploading: false,
-              key: key,
-            }));
-
-            onChange?.(key);
-
-            toast.success("File Uploaded Successfully");
-
-            resolve();
-          } else {
-            reject(new Error("Upload Failed...."));
-          }
-        };
-
-        xhr.onerror = () => {
-          reject(new Error("Upload Failed...."));
-        };
-
-        xhr.open("PUT", presignedUrl);
-
-        xhr.send(file);
-      });
-    } catch (error) {
-      toast.error("Something went wrong");
-
-      setFileState((prev) => ({
-        ...prev,
-        progress: 0,
-        error: true,
-        uploading: false,
-      }));
-    }
-  }
+    },
+    [fileTypeAccepted, onChange],
+  );
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -156,7 +159,7 @@ export const Uploader = ({ onChange, value, fileTypeAccepted }: isAppProps) => {
         uploadFile(file);
       }
     },
-    [fileState.objectUrl, uploadFile, fileTypeAccepted]
+    [fileState.objectUrl, uploadFile, fileTypeAccepted],
   );
 
   async function handleRemoveFile() {
@@ -262,17 +265,17 @@ export const Uploader = ({ onChange, value, fileTypeAccepted }: isAppProps) => {
     onDropRejected: (fileRejection: FileRejection[]) => {
       if (fileRejection.length > 0) {
         const tooMany = fileRejection.find(
-          (rejection) => rejection.errors[0].code === "too-many-files"
+          (rejection) => rejection.errors[0].code === "too-many-files",
         );
         if (tooMany) {
           toast.error("You can only upload one file at a time.");
         }
         const tooLarge = fileRejection.find(
-          (rejection) => rejection.errors[0].code === "file-too-large"
+          (rejection) => rejection.errors[0].code === "file-too-large",
         );
         if (tooLarge) {
           toast.error(
-            `File size must be less than ${fileTypeAccepted === "image" ? "5MB" : "500MB"}.`
+            `File size must be less than ${fileTypeAccepted === "image" ? "5MB" : "500MB"}.`,
           );
         }
       }
@@ -287,7 +290,7 @@ export const Uploader = ({ onChange, value, fileTypeAccepted }: isAppProps) => {
         "relative border-2 border-dashed duration-200 w-full h-64 transition-colors",
         isDragActive
           ? "border-primary bg-primary/10 border-solid"
-          : "border-border hover:border-primary"
+          : "border-border hover:border-primary",
       )}
     >
       <CardContent className="flex items-center justify-center h-full w-full p-4">

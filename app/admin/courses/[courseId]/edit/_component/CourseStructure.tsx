@@ -32,7 +32,6 @@ import {
   ChevronRight,
   FileText,
   GripVertical,
-  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -168,7 +167,7 @@ const CourseStructure = ({ data }: isAppProps) => {
             ...chapter,
             order: index + 1,
           };
-        }
+        },
       );
 
       const previousItems = [...items];
@@ -211,7 +210,7 @@ const CourseStructure = ({ data }: isAppProps) => {
       }
 
       const chapterIndex = items.findIndex(
-        (item) => item.id === activeChapterId
+        (item) => item.id === activeChapterId,
       );
 
       if (chapterIndex === -1) {
@@ -284,7 +283,7 @@ const CourseStructure = ({ data }: isAppProps) => {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
   return (
     <DndContext
