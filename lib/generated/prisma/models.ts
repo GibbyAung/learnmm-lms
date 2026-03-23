@@ -10,6 +10,10 @@
  */
 export type * from './models/Test'
 export type * from './models/User'
+export type * from './models/PlacementTest'
+export type * from './models/PlacementQuestion'
+export type * from './models/PlacementResult'
+export type * from './models/PlacementAnswer'
 export type * from './models/Session'
 export type * from './models/Account'
 export type * from './models/Verification'

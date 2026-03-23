@@ -242,6 +242,9 @@ export type UserWhereInput = {
   accounts?: Prisma.AccountListRelationFilter
   courses?: Prisma.CourseListRelationFilter
   enrollment?: Prisma.EnrollmentListRelationFilter
+  createdPlacementTests?: Prisma.PlacementTestListRelationFilter
+  assignedPlacementTests?: Prisma.PlacementResultListRelationFilter
+  studentPlacementResults?: Prisma.PlacementResultListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -261,6 +264,9 @@ export type UserOrderByWithRelationInput = {
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   courses?: Prisma.CourseOrderByRelationAggregateInput
   enrollment?: Prisma.EnrollmentOrderByRelationAggregateInput
+  createdPlacementTests?: Prisma.PlacementTestOrderByRelationAggregateInput
+  assignedPlacementTests?: Prisma.PlacementResultOrderByRelationAggregateInput
+  studentPlacementResults?: Prisma.PlacementResultOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -283,6 +289,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accounts?: Prisma.AccountListRelationFilter
   courses?: Prisma.CourseListRelationFilter
   enrollment?: Prisma.EnrollmentListRelationFilter
+  createdPlacementTests?: Prisma.PlacementTestListRelationFilter
+  assignedPlacementTests?: Prisma.PlacementResultListRelationFilter
+  studentPlacementResults?: Prisma.PlacementResultListRelationFilter
 }, "id" | "stripeCustomerId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -338,6 +347,9 @@ export type UserCreateInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -357,6 +369,9 @@ export type UserUncheckedCreateInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type UserUpdateInput = {
@@ -376,6 +391,9 @@ export type UserUpdateInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -395,6 +413,9 @@ export type UserUncheckedUpdateInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -512,6 +533,48 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type UserCreateNestedOneWithoutCreatedPlacementTestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutCreatedPlacementTestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPlacementTestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedPlacementTestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutCreatedPlacementTestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPlacementTestsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedPlacementTestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPlacementTestsInput, Prisma.UserUpdateWithoutCreatedPlacementTestsInput>, Prisma.UserUncheckedUpdateWithoutCreatedPlacementTestsInput>
+}
+
+export type UserCreateNestedOneWithoutStudentPlacementResultsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedCreateWithoutStudentPlacementResultsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStudentPlacementResultsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAssignedPlacementTestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutAssignedPlacementTestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedPlacementTestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStudentPlacementResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedCreateWithoutStudentPlacementResultsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStudentPlacementResultsInput
+  upsert?: Prisma.UserUpsertWithoutStudentPlacementResultsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStudentPlacementResultsInput, Prisma.UserUpdateWithoutStudentPlacementResultsInput>, Prisma.UserUncheckedUpdateWithoutStudentPlacementResultsInput>
+}
+
+export type UserUpdateOneRequiredWithoutAssignedPlacementTestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutAssignedPlacementTestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedPlacementTestsInput
+  upsert?: Prisma.UserUpsertWithoutAssignedPlacementTestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedPlacementTestsInput, Prisma.UserUpdateWithoutAssignedPlacementTestsInput>, Prisma.UserUncheckedUpdateWithoutAssignedPlacementTestsInput>
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -568,6 +631,306 @@ export type UserUpdateOneRequiredWithoutEnrollmentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEnrollmentInput, Prisma.UserUpdateWithoutEnrollmentInput>, Prisma.UserUncheckedUpdateWithoutEnrollmentInput>
 }
 
+export type UserCreateWithoutCreatedPlacementTestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
+}
+
+export type UserUncheckedCreateWithoutCreatedPlacementTestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type UserCreateOrConnectWithoutCreatedPlacementTestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutCreatedPlacementTestsInput>
+}
+
+export type UserUpsertWithoutCreatedPlacementTestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedUpdateWithoutCreatedPlacementTestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutCreatedPlacementTestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedPlacementTestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPlacementTestsInput, Prisma.UserUncheckedUpdateWithoutCreatedPlacementTestsInput>
+}
+
+export type UserUpdateWithoutCreatedPlacementTestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedPlacementTestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type UserCreateWithoutStudentPlacementResultsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserUncheckedCreateWithoutStudentPlacementResultsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserCreateOrConnectWithoutStudentPlacementResultsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedCreateWithoutStudentPlacementResultsInput>
+}
+
+export type UserCreateWithoutAssignedPlacementTestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
+}
+
+export type UserUncheckedCreateWithoutAssignedPlacementTestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stripeCustomerId?: string | null
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
+  enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type UserCreateOrConnectWithoutAssignedPlacementTestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutAssignedPlacementTestsInput>
+}
+
+export type UserUpsertWithoutStudentPlacementResultsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedUpdateWithoutStudentPlacementResultsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedCreateWithoutStudentPlacementResultsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStudentPlacementResultsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStudentPlacementResultsInput, Prisma.UserUncheckedUpdateWithoutStudentPlacementResultsInput>
+}
+
+export type UserUpdateWithoutStudentPlacementResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStudentPlacementResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserUpsertWithoutAssignedPlacementTestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedUpdateWithoutAssignedPlacementTestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedCreateWithoutAssignedPlacementTestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignedPlacementTestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignedPlacementTestsInput, Prisma.UserUncheckedUpdateWithoutAssignedPlacementTestsInput>
+}
+
+export type UserUpdateWithoutAssignedPlacementTestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignedPlacementTestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
+  enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -584,6 +947,9 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -602,6 +968,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -636,6 +1005,9 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -654,6 +1026,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -672,6 +1047,9 @@ export type UserCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -690,6 +1068,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -724,6 +1105,9 @@ export type UserUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -742,6 +1126,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type UserCreateWithoutCoursesInput = {
@@ -760,6 +1147,9 @@ export type UserCreateWithoutCoursesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
 }
 
 export type UserUncheckedCreateWithoutCoursesInput = {
@@ -778,6 +1168,9 @@ export type UserUncheckedCreateWithoutCoursesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   enrollment?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type UserCreateOrConnectWithoutCoursesInput = {
@@ -812,6 +1205,9 @@ export type UserUpdateWithoutCoursesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCoursesInput = {
@@ -830,6 +1226,9 @@ export type UserUncheckedUpdateWithoutCoursesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   enrollment?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type UserCreateWithoutEnrollmentInput = {
@@ -848,6 +1247,9 @@ export type UserCreateWithoutEnrollmentInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultCreateNestedManyWithoutStudentInput
 }
 
 export type UserUncheckedCreateWithoutEnrollmentInput = {
@@ -866,6 +1268,9 @@ export type UserUncheckedCreateWithoutEnrollmentInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   courses?: Prisma.CourseUncheckedCreateNestedManyWithoutUserInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedCreateNestedManyWithoutTeacherInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutAssignedByInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type UserCreateOrConnectWithoutEnrollmentInput = {
@@ -900,6 +1305,9 @@ export type UserUpdateWithoutEnrollmentInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUpdateManyWithoutStudentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEnrollmentInput = {
@@ -918,6 +1326,9 @@ export type UserUncheckedUpdateWithoutEnrollmentInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   courses?: Prisma.CourseUncheckedUpdateManyWithoutUserNestedInput
+  createdPlacementTests?: Prisma.PlacementTestUncheckedUpdateManyWithoutTeacherNestedInput
+  assignedPlacementTests?: Prisma.PlacementResultUncheckedUpdateManyWithoutAssignedByNestedInput
+  studentPlacementResults?: Prisma.PlacementResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 
@@ -930,6 +1341,9 @@ export type UserCountOutputType = {
   accounts: number
   courses: number
   enrollment: number
+  createdPlacementTests: number
+  assignedPlacementTests: number
+  studentPlacementResults: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -937,6 +1351,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   courses?: boolean | UserCountOutputTypeCountCoursesArgs
   enrollment?: boolean | UserCountOutputTypeCountEnrollmentArgs
+  createdPlacementTests?: boolean | UserCountOutputTypeCountCreatedPlacementTestsArgs
+  assignedPlacementTests?: boolean | UserCountOutputTypeCountAssignedPlacementTestsArgs
+  studentPlacementResults?: boolean | UserCountOutputTypeCountStudentPlacementResultsArgs
 }
 
 /**
@@ -977,6 +1394,27 @@ export type UserCountOutputTypeCountEnrollmentArgs<ExtArgs extends runtime.Types
   where?: Prisma.EnrollmentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedPlacementTestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlacementTestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignedPlacementTestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlacementResultWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStudentPlacementResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlacementResultWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -995,6 +1433,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   courses?: boolean | Prisma.User$coursesArgs<ExtArgs>
   enrollment?: boolean | Prisma.User$enrollmentArgs<ExtArgs>
+  createdPlacementTests?: boolean | Prisma.User$createdPlacementTestsArgs<ExtArgs>
+  assignedPlacementTests?: boolean | Prisma.User$assignedPlacementTestsArgs<ExtArgs>
+  studentPlacementResults?: boolean | Prisma.User$studentPlacementResultsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1049,6 +1490,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   courses?: boolean | Prisma.User$coursesArgs<ExtArgs>
   enrollment?: boolean | Prisma.User$enrollmentArgs<ExtArgs>
+  createdPlacementTests?: boolean | Prisma.User$createdPlacementTestsArgs<ExtArgs>
+  assignedPlacementTests?: boolean | Prisma.User$assignedPlacementTestsArgs<ExtArgs>
+  studentPlacementResults?: boolean | Prisma.User$studentPlacementResultsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1061,6 +1505,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     courses: Prisma.$CoursePayload<ExtArgs>[]
     enrollment: Prisma.$EnrollmentPayload<ExtArgs>[]
+    createdPlacementTests: Prisma.$PlacementTestPayload<ExtArgs>[]
+    assignedPlacementTests: Prisma.$PlacementResultPayload<ExtArgs>[]
+    studentPlacementResults: Prisma.$PlacementResultPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1473,6 +1920,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   courses<T extends Prisma.User$coursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   enrollment<T extends Prisma.User$enrollmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPlacementTests<T extends Prisma.User$createdPlacementTestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPlacementTestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlacementTestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedPlacementTests<T extends Prisma.User$assignedPlacementTestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedPlacementTestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlacementResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  studentPlacementResults<T extends Prisma.User$studentPlacementResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$studentPlacementResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlacementResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1995,6 +2445,78 @@ export type User$enrollmentArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.EnrollmentScalarFieldEnum | Prisma.EnrollmentScalarFieldEnum[]
+}
+
+/**
+ * User.createdPlacementTests
+ */
+export type User$createdPlacementTestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlacementTest
+   */
+  select?: Prisma.PlacementTestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlacementTest
+   */
+  omit?: Prisma.PlacementTestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlacementTestInclude<ExtArgs> | null
+  where?: Prisma.PlacementTestWhereInput
+  orderBy?: Prisma.PlacementTestOrderByWithRelationInput | Prisma.PlacementTestOrderByWithRelationInput[]
+  cursor?: Prisma.PlacementTestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlacementTestScalarFieldEnum | Prisma.PlacementTestScalarFieldEnum[]
+}
+
+/**
+ * User.assignedPlacementTests
+ */
+export type User$assignedPlacementTestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlacementResult
+   */
+  select?: Prisma.PlacementResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlacementResult
+   */
+  omit?: Prisma.PlacementResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlacementResultInclude<ExtArgs> | null
+  where?: Prisma.PlacementResultWhereInput
+  orderBy?: Prisma.PlacementResultOrderByWithRelationInput | Prisma.PlacementResultOrderByWithRelationInput[]
+  cursor?: Prisma.PlacementResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlacementResultScalarFieldEnum | Prisma.PlacementResultScalarFieldEnum[]
+}
+
+/**
+ * User.studentPlacementResults
+ */
+export type User$studentPlacementResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlacementResult
+   */
+  select?: Prisma.PlacementResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlacementResult
+   */
+  omit?: Prisma.PlacementResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlacementResultInclude<ExtArgs> | null
+  where?: Prisma.PlacementResultWhereInput
+  orderBy?: Prisma.PlacementResultOrderByWithRelationInput | Prisma.PlacementResultOrderByWithRelationInput[]
+  cursor?: Prisma.PlacementResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlacementResultScalarFieldEnum | Prisma.PlacementResultScalarFieldEnum[]
 }
 
 /**

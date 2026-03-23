@@ -3,8 +3,14 @@ import { requiredUser } from "@/app/data/user/require-user";
 import { prisma } from "@/lib/prisma";
 
 type PlacementQueryDb = {
-  placementTest: { findMany: (args: object) => Promise<unknown>; findFirst: (args: object) => Promise<unknown> };
-  placementResult: { findMany: (args: object) => Promise<unknown>; findFirst: (args: object) => Promise<unknown> };
+  placementTest: {
+    findMany: (args: object) => Promise<unknown>;
+    findFirst: (args: object) => Promise<unknown>;
+  };
+  placementResult: {
+    findMany: (args: object) => Promise<unknown>;
+    findFirst: (args: object) => Promise<unknown>;
+  };
   user: { findMany: (args: object) => Promise<unknown> };
 };
 
@@ -17,22 +23,35 @@ export async function adminGetPlacementTests() {
     where: { teacherId: session.user.id },
     include: { _count: { select: { questions: true, results: true } } },
     orderBy: { createdAt: "desc" },
-  })) as Array<{ id: string; title: string; description: string | null; _count: { questions: number; results: number } }>;
+  })) as Array<{
+    id: string;
+    title: string;
+    description: string | null;
+    _count: { questions: number; results: number };
+  }>;
 }
 
 export async function adminGetPlacementTest(testId: string) {
   const session = await requireAdmin();
 
-  return (await db.placementTest.findFirst({
+  const result = await db.placementTest.findFirst({
     where: { id: testId, teacherId: session.user.id },
     include: { questions: { orderBy: { position: "asc" } } },
-  })) as {
+  });
+
+  console.log(
+    "adminGetPlacementTest - Raw result:",
+    JSON.stringify(result, null, 2),
+  );
+
+  return result as {
     id: string;
     title: string;
     description: string | null;
     questions: Array<{
       id: string;
       question: string;
+      imageUrl: string | null;
       type: "MULTIPLE_CHOICE" | "TRUE_FALSE";
       options: unknown;
       correctAnswer: string;
@@ -89,13 +108,20 @@ export async function studentGetAssignedPlacementTests() {
 export async function studentGetPlacementResult(resultId: string) {
   const user = await requiredUser();
 
-  return (await db.placementResult.findFirst({
+  const result = await db.placementResult.findFirst({
     where: { id: resultId, studentId: user.id },
     include: {
       test: { include: { questions: { orderBy: { position: "asc" } } } },
       answers: true,
     },
-  })) as {
+  });
+
+  console.log(
+    "studentGetPlacementResult - Raw result:",
+    JSON.stringify(result, null, 2),
+  );
+
+  return result as {
     id: string;
     status: string;
     score: number | null;
@@ -106,6 +132,7 @@ export async function studentGetPlacementResult(resultId: string) {
       questions: Array<{
         id: string;
         question: string;
+        imageUrl: string | null;
         type: "MULTIPLE_CHOICE" | "TRUE_FALSE";
         options: unknown;
         correctAnswer: string;

@@ -53,7 +53,7 @@ model PlacementTest {
   updatedAt   DateTime @updatedAt
 
   teacherId String
-  teacher   User @relation("PlacementTestTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher   User   @relation("PlacementTestTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
 
   questions PlacementQuestion[]
   results   PlacementResult[]
@@ -62,6 +62,7 @@ model PlacementTest {
 model PlacementQuestion {
   id            String                @id @default(uuid())
   question      String
+  imageUrl      String?
   type          PlacementQuestionType
   options       Json?
   correctAnswer String
@@ -78,24 +79,24 @@ model PlacementQuestion {
 }
 
 model PlacementResult {
-  id             String   @id @default(uuid())
-  assignedAt     DateTime @default(now())
+  id             String                @id @default(uuid())
+  assignedAt     DateTime              @default(now())
   submittedAt    DateTime?
   score          Int?
-  totalQuestions Int      @default(0)
-  correctCount   Int      @default(0)
+  totalQuestions Int                   @default(0)
+  correctCount   Int                   @default(0)
   status         PlacementResultStatus @default(ASSIGNED)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
 
   testId String
   test   PlacementTest @relation(fields: [testId], references: [id], onDelete: Cascade)
 
   studentId String
-  student   User @relation("PlacementResultStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  student   User   @relation("PlacementResultStudent", fields: [studentId], references: [id], onDelete: Cascade)
 
   assignedById String
-  assignedBy   User @relation("PlacementResultAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
+  assignedBy   User   @relation("PlacementResultAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
 
   answers PlacementAnswer[]
 

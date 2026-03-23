@@ -386,6 +386,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Test: 'Test',
   User: 'User',
+  PlacementTest: 'PlacementTest',
+  PlacementQuestion: 'PlacementQuestion',
+  PlacementResult: 'PlacementResult',
+  PlacementAnswer: 'PlacementAnswer',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
@@ -408,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "test" | "user" | "session" | "account" | "verification" | "course" | "courseChapter" | "lesson" | "enrollment"
+    modelProps: "test" | "user" | "placementTest" | "placementQuestion" | "placementResult" | "placementAnswer" | "session" | "account" | "verification" | "course" | "courseChapter" | "lesson" | "enrollment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -557,6 +561,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlacementTest: {
+      payload: Prisma.$PlacementTestPayload<ExtArgs>
+      fields: Prisma.PlacementTestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlacementTestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlacementTestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        findFirst: {
+          args: Prisma.PlacementTestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlacementTestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        findMany: {
+          args: Prisma.PlacementTestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>[]
+        }
+        create: {
+          args: Prisma.PlacementTestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        createMany: {
+          args: Prisma.PlacementTestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlacementTestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>[]
+        }
+        delete: {
+          args: Prisma.PlacementTestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        update: {
+          args: Prisma.PlacementTestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlacementTestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlacementTestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlacementTestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlacementTestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementTestPayload>
+        }
+        aggregate: {
+          args: Prisma.PlacementTestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlacementTest>
+        }
+        groupBy: {
+          args: Prisma.PlacementTestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementTestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlacementTestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementTestCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlacementQuestion: {
+      payload: Prisma.$PlacementQuestionPayload<ExtArgs>
+      fields: Prisma.PlacementQuestionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlacementQuestionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlacementQuestionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        findFirst: {
+          args: Prisma.PlacementQuestionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlacementQuestionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        findMany: {
+          args: Prisma.PlacementQuestionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>[]
+        }
+        create: {
+          args: Prisma.PlacementQuestionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        createMany: {
+          args: Prisma.PlacementQuestionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlacementQuestionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>[]
+        }
+        delete: {
+          args: Prisma.PlacementQuestionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        update: {
+          args: Prisma.PlacementQuestionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlacementQuestionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlacementQuestionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlacementQuestionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlacementQuestionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementQuestionPayload>
+        }
+        aggregate: {
+          args: Prisma.PlacementQuestionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlacementQuestion>
+        }
+        groupBy: {
+          args: Prisma.PlacementQuestionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementQuestionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlacementQuestionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementQuestionCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlacementResult: {
+      payload: Prisma.$PlacementResultPayload<ExtArgs>
+      fields: Prisma.PlacementResultFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlacementResultFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlacementResultFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        findFirst: {
+          args: Prisma.PlacementResultFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlacementResultFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        findMany: {
+          args: Prisma.PlacementResultFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>[]
+        }
+        create: {
+          args: Prisma.PlacementResultCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        createMany: {
+          args: Prisma.PlacementResultCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlacementResultCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>[]
+        }
+        delete: {
+          args: Prisma.PlacementResultDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        update: {
+          args: Prisma.PlacementResultUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlacementResultDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlacementResultUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlacementResultUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlacementResultUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementResultPayload>
+        }
+        aggregate: {
+          args: Prisma.PlacementResultAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlacementResult>
+        }
+        groupBy: {
+          args: Prisma.PlacementResultGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementResultGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlacementResultCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementResultCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlacementAnswer: {
+      payload: Prisma.$PlacementAnswerPayload<ExtArgs>
+      fields: Prisma.PlacementAnswerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlacementAnswerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlacementAnswerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        findFirst: {
+          args: Prisma.PlacementAnswerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlacementAnswerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        findMany: {
+          args: Prisma.PlacementAnswerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>[]
+        }
+        create: {
+          args: Prisma.PlacementAnswerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        createMany: {
+          args: Prisma.PlacementAnswerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlacementAnswerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>[]
+        }
+        delete: {
+          args: Prisma.PlacementAnswerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        update: {
+          args: Prisma.PlacementAnswerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlacementAnswerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlacementAnswerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlacementAnswerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlacementAnswerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlacementAnswerPayload>
+        }
+        aggregate: {
+          args: Prisma.PlacementAnswerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlacementAnswer>
+        }
+        groupBy: {
+          args: Prisma.PlacementAnswerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementAnswerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlacementAnswerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlacementAnswerCountAggregateOutputType> | number
         }
       }
     }
@@ -1143,6 +1443,65 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const PlacementTestScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  teacherId: 'teacherId'
+} as const
+
+export type PlacementTestScalarFieldEnum = (typeof PlacementTestScalarFieldEnum)[keyof typeof PlacementTestScalarFieldEnum]
+
+
+export const PlacementQuestionScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  imageUrl: 'imageUrl',
+  type: 'type',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  testId: 'testId'
+} as const
+
+export type PlacementQuestionScalarFieldEnum = (typeof PlacementQuestionScalarFieldEnum)[keyof typeof PlacementQuestionScalarFieldEnum]
+
+
+export const PlacementResultScalarFieldEnum = {
+  id: 'id',
+  assignedAt: 'assignedAt',
+  submittedAt: 'submittedAt',
+  score: 'score',
+  totalQuestions: 'totalQuestions',
+  correctCount: 'correctCount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  testId: 'testId',
+  studentId: 'studentId',
+  assignedById: 'assignedById'
+} as const
+
+export type PlacementResultScalarFieldEnum = (typeof PlacementResultScalarFieldEnum)[keyof typeof PlacementResultScalarFieldEnum]
+
+
+export const PlacementAnswerScalarFieldEnum = {
+  id: 'id',
+  answer: 'answer',
+  isCorrect: 'isCorrect',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  resultId: 'resultId',
+  questionId: 'questionId'
+} as const
+
+export type PlacementAnswerScalarFieldEnum = (typeof PlacementAnswerScalarFieldEnum)[keyof typeof PlacementAnswerScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -1260,6 +1619,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -1274,6 +1641,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1328,6 +1704,48 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PlacementQuestionType'
+ */
+export type EnumPlacementQuestionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlacementQuestionType'>
+    
+
+
+/**
+ * Reference to a field of type 'PlacementQuestionType[]'
+ */
+export type ListEnumPlacementQuestionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlacementQuestionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'PlacementResultStatus'
+ */
+export type EnumPlacementResultStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlacementResultStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PlacementResultStatus[]'
+ */
+export type ListEnumPlacementResultStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlacementResultStatus[]'>
     
 
 
@@ -1483,6 +1901,10 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   test?: Prisma.TestOmit
   user?: Prisma.UserOmit
+  placementTest?: Prisma.PlacementTestOmit
+  placementQuestion?: Prisma.PlacementQuestionOmit
+  placementResult?: Prisma.PlacementResultOmit
+  placementAnswer?: Prisma.PlacementAnswerOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

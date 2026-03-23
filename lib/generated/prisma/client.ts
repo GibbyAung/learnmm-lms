@@ -50,6 +50,26 @@ export type Test = Prisma.TestModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model PlacementTest
+ * 
+ */
+export type PlacementTest = Prisma.PlacementTestModel
+/**
+ * Model PlacementQuestion
+ * 
+ */
+export type PlacementQuestion = Prisma.PlacementQuestionModel
+/**
+ * Model PlacementResult
+ * 
+ */
+export type PlacementResult = Prisma.PlacementResultModel
+/**
+ * Model PlacementAnswer
+ * 
+ */
+export type PlacementAnswer = Prisma.PlacementAnswerModel
+/**
  * Model Session
  * 
  */

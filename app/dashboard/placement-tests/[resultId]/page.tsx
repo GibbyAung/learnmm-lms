@@ -9,26 +9,25 @@ export default async function StudentPlacementResultDetailPage({
   params: Promise<{ resultId: string }>;
 }) {
   const { resultId } = await params;
-  const result = (await studentGetPlacementResult(resultId)) as
-    | {
+  const result = (await studentGetPlacementResult(resultId)) as {
+    id: string;
+    status: string;
+    score: number | null;
+    correctCount: number;
+    totalQuestions: number;
+    test: {
+      title: string;
+      questions: Array<{
         id: string;
-        status: string;
-        score: number | null;
-        correctCount: number;
-        totalQuestions: number;
-        test: {
-          title: string;
-          questions: Array<{
-            id: string;
-            question: string;
-            type: "MULTIPLE_CHOICE" | "TRUE_FALSE";
-            options: unknown;
-            correctAnswer: string;
-          }>;
-        };
-        answers: Array<{ questionId: string; answer: string; isCorrect: boolean }>;
-      }
-    | null;
+        question: string;
+        imageUrl: string | null;
+        type: "MULTIPLE_CHOICE" | "TRUE_FALSE";
+        options: unknown;
+        correctAnswer: string;
+      }>;
+    };
+    answers: Array<{ questionId: string; answer: string; isCorrect: boolean }>;
+  } | null;
 
   if (!result) {
     notFound();
@@ -43,6 +42,7 @@ export default async function StudentPlacementResultDetailPage({
           questions={result.test.questions.map((question) => ({
             id: question.id,
             question: question.question,
+            imageUrl: question.imageUrl,
             type: question.type,
             options: question.options,
           }))}
@@ -51,7 +51,9 @@ export default async function StudentPlacementResultDetailPage({
     );
   }
 
-  const answerMap = new Map(result.answers.map((answer) => [answer.questionId, answer]));
+  const answerMap = new Map(
+    result.answers.map((answer) => [answer.questionId, answer]),
+  );
 
   return (
     <div className="space-y-6">
@@ -78,6 +80,15 @@ export default async function StudentPlacementResultDetailPage({
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm space-y-1">
+              {question.imageUrl && (
+                <div className="mb-2">
+                  <img
+                    src={question.imageUrl}
+                    alt="Question image"
+                    className="max-w-full h-auto rounded-md border"
+                  />
+                </div>
+              )}
               <p>Your answer: {answer?.answer ?? "-"}</p>
               <p>Correct answer: {question.correctAnswer}</p>
               <p>{answer?.isCorrect ? "Correct" : "Incorrect"}</p>

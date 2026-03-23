@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function AssignPlacementTestForm({
   tests,
@@ -34,7 +41,7 @@ export function AssignPlacementTestForm({
     <div className="space-y-4 max-w-xl">
       <div className="space-y-2">
         <Label>Placement test</Label>
-        <select
+        {/* <select
           className="w-full rounded-md border p-2"
           value={testId}
           onChange={(event) => setTestId(event.target.value)}
@@ -44,12 +51,24 @@ export function AssignPlacementTestForm({
               {test.title}
             </option>
           ))}
-        </select>
+        </select> */}
+        <Select>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select a test" />
+          </SelectTrigger>
+          <SelectContent>
+            {tests.map((test) => (
+              <SelectItem key={test.id} value={test.id}>
+                {test.title}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="space-y-2">
         <Label>Student</Label>
-        <select
+        {/* <select
           className="w-full rounded-md border p-2"
           value={studentId}
           onChange={(event) => setStudentId(event.target.value)}
@@ -59,10 +78,26 @@ export function AssignPlacementTestForm({
               {student.name} ({student.email})
             </option>
           ))}
-        </select>
+        </select> */}
+        <Select>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select a student" />
+          </SelectTrigger>
+          <SelectContent>
+            {students.map((student) => (
+              <SelectItem key={student.id} value={student.id}>
+                {student.name} ({student.email})
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      <Button type="button" onClick={submit} disabled={loading || !testId || !studentId}>
+      <Button
+        type="button"
+        onClick={submit}
+        disabled={loading || !testId || !studentId}
+      >
         {loading ? "Assigning..." : "Assign test"}
       </Button>
     </div>

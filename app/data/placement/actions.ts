@@ -56,6 +56,7 @@ export async function createPlacementTest(
         questions: {
           create: parsed.data.questions.map((question, index) => ({
             question: question.question,
+            imageUrl: question.imageUrl,
             type: question.type,
             options: question.options,
             correctAnswer: question.correctAnswer,
@@ -104,6 +105,7 @@ export async function updatePlacementTest(
           questions: {
             create: parsed.data.questions.map((question, index) => ({
               question: question.question,
+              imageUrl: question.imageUrl,
               type: question.type,
               options: question.options,
               correctAnswer: question.correctAnswer,
@@ -221,7 +223,9 @@ export async function submitPlacementTest(
 
     const gradedAnswers = result.test.questions.map((question) => {
       const answer = submittedByQuestion.get(question.id) ?? "";
-      const isCorrect = answer.trim().toLowerCase() === question.correctAnswer.trim().toLowerCase();
+      const isCorrect =
+        answer.trim().toLowerCase() ===
+        question.correctAnswer.trim().toLowerCase();
 
       return {
         questionId: question.id,
@@ -230,9 +234,14 @@ export async function submitPlacementTest(
       };
     });
 
-    const correctCount = gradedAnswers.filter((answer) => answer.isCorrect).length;
+    const correctCount = gradedAnswers.filter(
+      (answer) => answer.isCorrect,
+    ).length;
     const totalQuestions = result.test.questions.length;
-    const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
+    const score =
+      totalQuestions === 0
+        ? 0
+        : Math.round((correctCount / totalQuestions) * 100);
 
     await db.$transaction(async (tx) => {
       await tx.placementAnswer.deleteMany({ where: { resultId: result.id } });

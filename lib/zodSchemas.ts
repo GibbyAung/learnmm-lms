@@ -71,8 +71,9 @@ export const PlacementQuestionType = ["MULTIPLE_CHOICE", "TRUE_FALSE"] as const;
 
 export const placementQuestionSchema = z.object({
   question: z.string().min(3, { message: "Question is required" }),
+  imageUrl: z.string().optional(),
   type: z.enum(PlacementQuestionType),
-  options: z.array(z.string()).default([]),
+  options: z.array(z.string()),
   correctAnswer: z.string().min(1, { message: "Correct answer is required" }),
 });
 
@@ -102,7 +103,13 @@ export const submitPlacementTestSchema = z.object({
 export type CourseScehmaType = z.infer<typeof courseSchema>;
 export type ChapterSchemaType = z.infer<typeof chapterSchema>;
 export type LessonSchemaType = z.infer<typeof lessonSchema>;
-export type PlacementQuestionSchemaType = z.infer<typeof placementQuestionSchema>;
+export type PlacementQuestionSchemaType = z.infer<
+  typeof placementQuestionSchema
+>;
 export type PlacementTestSchemaType = z.infer<typeof placementTestSchema>;
-export type AssignPlacementTestSchemaType = z.infer<typeof assignPlacementTestSchema>;
-export type SubmitPlacementTestSchemaType = z.infer<typeof submitPlacementTestSchema>;
+export type AssignPlacementTestSchemaType = z.infer<
+  typeof assignPlacementTestSchema
+>;
+export type SubmitPlacementTestSchemaType = z.infer<
+  typeof submitPlacementTestSchema
+>;

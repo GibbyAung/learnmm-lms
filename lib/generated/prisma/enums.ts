@@ -9,6 +9,23 @@
 * 🟢 You can import this file directly.
 */
 
+export const PlacementQuestionType = {
+  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
+  TRUE_FALSE: 'TRUE_FALSE'
+} as const
+
+export type PlacementQuestionType = (typeof PlacementQuestionType)[keyof typeof PlacementQuestionType]
+
+
+export const PlacementResultStatus = {
+  ASSIGNED: 'ASSIGNED',
+  SUBMITTED: 'SUBMITTED',
+  GRADED: 'GRADED'
+} as const
+
+export type PlacementResultStatus = (typeof PlacementResultStatus)[keyof typeof PlacementResultStatus]
+
+
 export const CourseLevel = {
   BEGINNER: 'BEGINNER',
   INTERMEDIATE: 'INTERMEDIATE',

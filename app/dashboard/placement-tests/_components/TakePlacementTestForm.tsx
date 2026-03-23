@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useConstruct } from "@/hooks/use-construct";
 
 export function TakePlacementTestForm({
   resultId,
@@ -16,6 +17,7 @@ export function TakePlacementTestForm({
   questions: {
     id: string;
     question: string;
+    imageUrl?: string | null;
     type: "MULTIPLE_CHOICE" | "TRUE_FALSE";
     options: unknown;
   }[];
@@ -62,6 +64,16 @@ export function TakePlacementTestForm({
               </CardTitle>
             </CardHeader>
             <CardContent>
+              {/* Debug: log imageUrl */}
+              {question.imageUrl ? (
+                <div className="mb-4">
+                  <img
+                    src={useConstruct(question.imageUrl)}
+                    alt="Question image"
+                    className="max-w-full h-auto rounded-md border"
+                  />
+                </div>
+              ) : null}
               <div className="space-y-2">
                 {options.map((option) => (
                   <label className="flex items-center gap-2" key={option}>

@@ -53,6 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Test: 'Test',
   User: 'User',
+  PlacementTest: 'PlacementTest',
+  PlacementQuestion: 'PlacementQuestion',
+  PlacementResult: 'PlacementResult',
+  PlacementAnswer: 'PlacementAnswer',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
@@ -102,6 +106,65 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PlacementTestScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  teacherId: 'teacherId'
+} as const
+
+export type PlacementTestScalarFieldEnum = (typeof PlacementTestScalarFieldEnum)[keyof typeof PlacementTestScalarFieldEnum]
+
+
+export const PlacementQuestionScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  imageUrl: 'imageUrl',
+  type: 'type',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  testId: 'testId'
+} as const
+
+export type PlacementQuestionScalarFieldEnum = (typeof PlacementQuestionScalarFieldEnum)[keyof typeof PlacementQuestionScalarFieldEnum]
+
+
+export const PlacementResultScalarFieldEnum = {
+  id: 'id',
+  assignedAt: 'assignedAt',
+  submittedAt: 'submittedAt',
+  score: 'score',
+  totalQuestions: 'totalQuestions',
+  correctCount: 'correctCount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  testId: 'testId',
+  studentId: 'studentId',
+  assignedById: 'assignedById'
+} as const
+
+export type PlacementResultScalarFieldEnum = (typeof PlacementResultScalarFieldEnum)[keyof typeof PlacementResultScalarFieldEnum]
+
+
+export const PlacementAnswerScalarFieldEnum = {
+  id: 'id',
+  answer: 'answer',
+  isCorrect: 'isCorrect',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  resultId: 'resultId',
+  questionId: 'questionId'
+} as const
+
+export type PlacementAnswerScalarFieldEnum = (typeof PlacementAnswerScalarFieldEnum)[keyof typeof PlacementAnswerScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -221,6 +284,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -235,4 +306,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
